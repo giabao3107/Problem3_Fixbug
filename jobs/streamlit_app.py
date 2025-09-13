@@ -136,15 +136,34 @@ def create_signals_table(signals: List[TradingSignal]) -> pd.DataFrame:
     return pd.DataFrame(data)
 
 
+def filter_trading_days(df: pd.DataFrame) -> pd.DataFrame:
+    """Filter out non-trading days (weekends and holidays) from DataFrame."""
+    if df.empty:
+        return df
+    
+    # Ensure timestamp is datetime
+    if 'timestamp' in df.columns:
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        # Filter out weekends (Saturday=5, Sunday=6)
+        df = df[df['timestamp'].dt.dayofweek < 5]
+        # Remove rows where volume is 0 or NaN (likely holidays)
+        if 'volume' in df.columns:
+            df = df[(df['volume'] > 0) & (df['volume'].notna())]
+    
+    return df.reset_index(drop=True)
+
 def create_ohlc_chart(df: pd.DataFrame, ticker: str) -> go.Figure:
     """Create OHLC chart with indicators."""
     if df.empty:
         return go.Figure()
     
+    # Filter out non-trading days for continuous chart
+    df = filter_trading_days(df)
+    
     # Create subplots
     fig = make_subplots(
         rows=3, cols=1,
-        shared_xaxis=True,
+        shared_xaxes=True,
         vertical_spacing=0.05,
         row_heights=[0.6, 0.2, 0.2],
         subplot_titles=[f'{ticker} - Price & PSAR', 'RSI', 'Volume']
@@ -226,9 +245,22 @@ def create_ohlc_chart(df: pd.DataFrame, ticker: str) -> go.Figure:
         title_x=0.5
     )
     
-    # Remove x-axis labels for all but bottom subplot
-    fig.update_xaxes(showticklabels=False, row=1, col=1)
-    fig.update_xaxes(showticklabels=False, row=2, col=1)
+    # Configure x-axis for continuous trading days display
+    fig.update_xaxes(
+        type='category',  # Use category type to avoid gaps
+        showticklabels=False, 
+        row=1, col=1
+    )
+    fig.update_xaxes(
+        type='category',
+        showticklabels=False, 
+        row=2, col=1
+    )
+    fig.update_xaxes(
+        type='category',
+        tickformat='%Y-%m-%d',
+        row=3, col=1
+    )
     
     return fig
 
@@ -392,7 +424,7 @@ def main():
             if chart_ticker and chart_ticker in real_data:
                 df = real_data[chart_ticker]
                 fig = create_ohlc_chart(df, chart_ticker)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
                 
                 # Current values
                 current_row = df.iloc[-1]
@@ -453,17 +485,17 @@ def main():
         if buy_signals:
             st.subheader("🟢 Buy Signals")
             buy_df = create_signals_table(buy_signals)
-            st.dataframe(buy_df, use_container_width=True)
+            st.dataframe(buy_df, width='stretch')
         
         if sell_signals:
             st.subheader("🔴 Sell Signals")
             sell_df = create_signals_table(sell_signals)
-            st.dataframe(sell_df, use_container_width=True)
+            st.dataframe(sell_df, width='stretch')
         
         if risk_signals:
             st.subheader("🟠 Risk Warnings")
             risk_df = create_signals_table(risk_signals)
-            st.dataframe(risk_df, use_container_width=True)
+            st.dataframe(risk_df, width='stretch')
         
         if not recent_signals:
             st.info("No recent signals. Waiting for market data...")
@@ -489,28 +521,30 @@ def main():
             st.metric(
                 "Portfolio Value",
                 format_currency(portfolio_data['Total Value']),
-                f"{portfolio_data['Daily P&L']:+.2%} today"
+                f"{portfolio_data['Daily P&L']:+.2%} today".replace('%', ' percent')
             )
         
         with col2:
+            cash_pct = portfolio_data['Cash']/portfolio_data['Total Value']
             st.metric(
                 "Available Cash",
                 format_currency(portfolio_data['Cash']),
-                f"{portfolio_data['Cash']/portfolio_data['Total Value']:.0%} of portfolio"
+                f"{cash_pct:.0%} of portfolio".replace('%', ' percent')
             )
         
         with col3:
+            util_pct = portfolio_data['Positions']/portfolio_data['Max Positions']
             st.metric(
                 "Active Positions",
                 f"{portfolio_data['Positions']}/{portfolio_data['Max Positions']}",
-                f"{portfolio_data['Positions']/portfolio_data['Max Positions']:.0%} utilization"
+                f"{util_pct:.0%} utilization".replace('%', ' percent')
             )
         
         with col4:
             st.metric(
                 "Win Rate",
-                f"{portfolio_data['Win Rate']:.0%}",
-                f"Max DD: {portfolio_data['Max Drawdown']:+.1%}"
+                f"{portfolio_data['Win Rate']:.0%}".replace('%', ' percent'),
+                f"Max DD: {portfolio_data['Max Drawdown']:+.1%}".replace('%', ' percent')
             )
         
         # Position details (mock)
@@ -525,7 +559,7 @@ def main():
             'Value (VND)': ['26,500,000', '22,000,000', '72,400,000', '54,000,000']
         })
         
-        st.dataframe(positions_df, use_container_width=True)
+        st.dataframe(positions_df, width='stretch')
     
     with tab4:
         st.subheader("Analytics & Performance")
@@ -534,7 +568,7 @@ def main():
         if recent_signals:
             st.subheader("Signals Heatmap")
             heatmap_fig = create_signals_heatmap(recent_signals)
-            st.plotly_chart(heatmap_fig, use_container_width=True)
+            st.plotly_chart(heatmap_fig, width='stretch')
         
         # Performance metrics
         col1, col2 = st.columns(2)
@@ -543,13 +577,15 @@ def main():
             st.subheader("Signal Statistics")
             
             if recent_signals:
+                # Convert percentage to string to avoid PyArrow issues
+                avg_confidence = np.mean([s.confidence for s in recent_signals])
                 signal_stats = pd.DataFrame({
                     'Metric': ['Total Signals', 'Avg Confidence', 'High Confidence', 'Low Confidence'],
                     'Value': [
-                        len(recent_signals),
-                        f"{np.mean([s.confidence for s in recent_signals]):.1%}",
-                        len([s for s in recent_signals if s.confidence > 0.8]),
-                        len([s for s in recent_signals if s.confidence < 0.6])
+                        str(len(recent_signals)),
+                        f"{avg_confidence:.1%}",
+                        str(len([s for s in recent_signals if s.confidence > 0.8])),
+                        str(len([s for s in recent_signals if s.confidence < 0.6]))
                     ]
                 })
                 st.dataframe(signal_stats, hide_index=True)

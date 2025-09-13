@@ -16,6 +16,28 @@ from strategy.rsi_psar_engulfing import TradingSignal
 from utils.helpers import format_currency, format_percentage
 
 
+def filter_trading_days(df: pd.DataFrame) -> pd.DataFrame:
+    """Filter out non-trading days (weekends and holidays) from DataFrame."""
+    if df.empty:
+        return df
+    
+    # Ensure timestamp is datetime
+    if 'timestamp' in df.columns:
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        # Filter out weekends (Saturday=5, Sunday=6)
+        df = df[df['timestamp'].dt.dayofweek < 5]
+        # Remove rows where volume is 0 or NaN (likely holidays)
+        if 'volume' in df.columns:
+            df = df[(df['volume'] > 0) & (df['volume'].notna())]
+    elif hasattr(df.index, 'dtype') and 'datetime' in str(df.index.dtype):
+        # If using datetime index
+        df = df[df.index.dayofweek < 5]
+        if 'volume' in df.columns:
+            df = df[(df['volume'] > 0) & (df['volume'].notna())]
+    
+    return df.reset_index(drop=True)
+
+
 class ChartGenerator:
     """
     Main chart generator for trading data visualization.
@@ -63,6 +85,9 @@ class ChartGenerator:
         """
         if df.empty:
             return self._create_empty_chart(f"No data for {ticker}")
+        
+        # Filter out non-trading days for continuous chart
+        df = filter_trading_days(df)
         
         # Determine subplot structure
         if show_volume and show_indicators:
@@ -300,6 +325,17 @@ class ChartGenerator:
                 xanchor="left",
                 x=0.01
             )
+        )
+        
+        # Configure x-axis for continuous trading days display
+        fig.update_xaxes(
+            type='category',  # Use category type to avoid gaps for non-trading days
+            showgrid=True,
+            gridwidth=1,
+            gridcolor='rgba(128,128,128,0.2)',
+            showline=True,
+            linewidth=1,
+            linecolor='rgba(128,128,128,0.3)'
         )
         
         # Remove x-axis labels for all but bottom subplot
