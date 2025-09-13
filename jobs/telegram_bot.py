@@ -535,6 +535,219 @@ class TradingTelegramBot:
         
         await self.send_message(formatted_message)
     
+    async def send_daily_summary(self, summary_data: Dict[str, Any]) -> bool:
+        """
+        Send daily trading summary.
+        
+        Args:
+            summary_data: Dictionary containing daily summary information
+            
+        Returns:
+            bool: True if sent successfully
+        """
+        try:
+            message = self._format_daily_summary(summary_data)
+            return await self.send_message(message)
+        except Exception as e:
+            self.logger.error(f"Failed to send daily summary: {str(e)}")
+            return False
+    
+    async def send_portfolio_update(self, portfolio_data: Dict[str, Any]) -> bool:
+        """
+        Send portfolio update notification.
+        
+        Args:
+            portfolio_data: Dictionary containing portfolio information
+            
+        Returns:
+            bool: True if sent successfully
+        """
+        try:
+            message = self._format_portfolio_update(portfolio_data)
+            return await self.send_message(message)
+        except Exception as e:
+            self.logger.error(f"Failed to send portfolio update: {str(e)}")
+            return False
+    
+    async def send_automated_strategy_alert(self, strategy_data: Dict[str, Any]) -> bool:
+        """
+        Send automated strategy recommendation.
+        
+        Args:
+            strategy_data: Dictionary containing strategy recommendation
+            
+        Returns:
+            bool: True if sent successfully
+        """
+        try:
+            message = self._format_automated_strategy(strategy_data)
+            return await self.send_message(message)
+        except Exception as e:
+            self.logger.error(f"Failed to send automated strategy alert: {str(e)}")
+            return False
+    
+    def _format_daily_summary(self, summary_data: Dict[str, Any]) -> str:
+        """
+        Format daily summary message.
+        
+        Args:
+            summary_data: Summary data dictionary
+            
+        Returns:
+            str: Formatted message
+        """
+        date_str = summary_data.get('date', datetime.now().strftime('%d/%m/%Y'))
+        
+        message = f"📊 *BÁO CÁO CUỐI NGÀY - {date_str}*\n\n"
+        
+        # Trading signals summary
+        signals = summary_data.get('signals', {})
+        message += f"📈 *Tín hiệu giao dịch:*\n"
+        message += f"🟢 Mua: {signals.get('buy_count', 0)}\n"
+        message += f"🔴 Bán: {signals.get('sell_count', 0)}\n"
+        message += f"🟠 Cảnh báo: {signals.get('risk_count', 0)}\n\n"
+        
+        # Portfolio performance
+        portfolio = summary_data.get('portfolio', {})
+        if portfolio:
+            message += f"💼 *Portfolio:*\n"
+            message += f"💰 P&L hôm nay: {format_percentage(portfolio.get('daily_pnl', 0))}\n"
+            message += f"📊 Tổng P&L: {format_percentage(portfolio.get('total_pnl', 0))}\n"
+            message += f"🎯 Vị thế mở: {portfolio.get('open_positions', 0)}\n\n"
+        
+        # Top performers
+        top_gainers = summary_data.get('top_gainers', [])
+        if top_gainers:
+            message += f"🚀 *Top tăng giá:*\n"
+            for stock in top_gainers[:3]:
+                message += f"• {stock['ticker']}: {format_percentage(stock['change'])}\n"
+            message += "\n"
+        
+        # Market overview
+        market = summary_data.get('market', {})
+        if market:
+            message += f"📊 *Thị trường:*\n"
+            message += f"📈 VN-Index: {market.get('vnindex_change', 'N/A')}\n"
+            message += f"📊 Thanh khoản: {format_currency(market.get('total_volume', 0))}\n\n"
+        
+        message += f"⏰ *Cập nhật:* {datetime.now().strftime('%H:%M:%S')}"
+        
+        return message
+    
+    def _format_portfolio_update(self, portfolio_data: Dict[str, Any]) -> str:
+        """
+        Format portfolio update message.
+        
+        Args:
+            portfolio_data: Portfolio data dictionary
+            
+        Returns:
+            str: Formatted message
+        """
+        message = f"💼 *CẬP NHẬT PORTFOLIO*\n\n"
+        
+        # Overall performance
+        message += f"📊 *Tổng quan:*\n"
+        message += f"💰 Tổng giá trị: {format_currency(portfolio_data.get('total_value', 0))}\n"
+        message += f"📈 P&L hôm nay: {format_percentage(portfolio_data.get('daily_pnl', 0))}\n"
+        message += f"🎯 Tổng P&L: {format_percentage(portfolio_data.get('total_pnl', 0))}\n\n"
+        
+        # Active positions
+        positions = portfolio_data.get('positions', [])
+        if positions:
+            message += f"📋 *Vị thế hiện tại ({len(positions)}):*\n"
+            for pos in positions[:5]:  # Show top 5
+                pnl_emoji = "🟢" if pos.get('pnl_percent', 0) >= 0 else "🔴"
+                message += f"{pnl_emoji} {pos['ticker']}: {format_percentage(pos.get('pnl_percent', 0))}\n"
+            
+            if len(positions) > 5:
+                message += f"... và {len(positions) - 5} vị thế khác\n"
+            message += "\n"
+        
+        # Recent actions
+        recent_actions = portfolio_data.get('recent_actions', [])
+        if recent_actions:
+            message += f"🔄 *Giao dịch gần đây:*\n"
+            for action in recent_actions[:3]:
+                action_emoji = "🟢" if action['type'] == 'buy' else "🔴"
+                message += f"{action_emoji} {action['ticker']}: {action['type'].upper()}\n"
+            message += "\n"
+        
+        message += f"⏰ *Cập nhật:* {datetime.now().strftime('%H:%M:%S')}"
+        
+        return message
+    
+    def _format_automated_strategy(self, strategy_data: Dict[str, Any]) -> str:
+        """
+        Format automated strategy recommendation message.
+        
+        Args:
+            strategy_data: Strategy recommendation data
+            
+        Returns:
+            str: Formatted message
+        """
+        strategy_type = strategy_data.get('type', 'recommendation')
+        
+        emoji_map = {
+            'buy_recommendation': '🤖💚',
+            'sell_recommendation': '🤖❤️',
+            'risk_alert': '🤖⚠️',
+            'portfolio_rebalance': '🤖⚖️'
+        }
+        
+        emoji = emoji_map.get(strategy_type, '🤖')
+        
+        message = f"{emoji} *CHIẾN LƯỢC TỰ ĐỘNG*\n\n"
+        
+        # Strategy details
+        if strategy_type == 'buy_recommendation':
+            message += f"📈 *KHUYẾN NGHỊ MUA*\n\n"
+            message += f"📊 *Mã:* `{strategy_data.get('ticker', 'N/A')}`\n"
+            message += f"💰 *Giá đề xuất:* {format_currency(strategy_data.get('target_price', 0))}\n"
+            message += f"🎯 *Độ tin cậy:* {strategy_data.get('confidence', 0):.0%}\n"
+            
+            if 'stop_loss' in strategy_data:
+                message += f"🛑 *Stop Loss:* {format_currency(strategy_data['stop_loss'])}\n"
+            
+            if 'take_profit' in strategy_data:
+                message += f"🎯 *Take Profit:* {format_currency(strategy_data['take_profit'])}\n"
+            
+            if 'risk_reward_ratio' in strategy_data:
+                message += f"⚖️ *Risk/Reward:* 1:{strategy_data['risk_reward_ratio']:.1f}\n"
+        
+        elif strategy_type == 'sell_recommendation':
+            message += f"📉 *KHUYẾN NGHỊ BÁN*\n\n"
+            message += f"📊 *Mã:* `{strategy_data.get('ticker', 'N/A')}`\n"
+            message += f"💰 *Giá hiện tại:* {format_currency(strategy_data.get('current_price', 0))}\n"
+            message += f"📈 *P&L dự kiến:* {format_percentage(strategy_data.get('expected_pnl', 0))}\n"
+            message += f"🎯 *Độ tin cậy:* {strategy_data.get('confidence', 0):.0%}\n"
+        
+        elif strategy_type == 'risk_alert':
+            message += f"⚠️ *CẢNH BÁO RỦI RO*\n\n"
+            message += f"📊 *Mã:* `{strategy_data.get('ticker', 'N/A')}`\n"
+            message += f"🚨 *Mức độ rủi ro:* {strategy_data.get('risk_level', 'N/A')}\n"
+            message += f"📉 *Tổn thất tiềm năng:* {format_percentage(strategy_data.get('potential_loss', 0))}\n"
+        
+        elif strategy_type == 'portfolio_rebalance':
+            message += f"⚖️ *KHUYẾN NGHỊ CÂN BẰNG PORTFOLIO*\n\n"
+            rebalance_actions = strategy_data.get('actions', [])
+            if rebalance_actions:
+                message += f"🔄 *Hành động đề xuất:*\n"
+                for action in rebalance_actions[:5]:
+                    action_emoji = "➕" if action['type'] == 'increase' else "➖"
+                    message += f"{action_emoji} {action['ticker']}: {action['type']} {action.get('percentage', 0):.1f}%\n"
+        
+        # Add reasoning
+        reason = strategy_data.get('reason', '')
+        if reason:
+            message += f"\n💡 *Lý do:* {reason}\n"
+        
+        # Add timestamp
+        message += f"\n⏰ *Thời gian:* {datetime.now().strftime('%H:%M:%S')}"
+        
+        return message
+    
     def get_bot_status(self) -> Dict[str, Any]:
         """Get current bot status."""
         return {

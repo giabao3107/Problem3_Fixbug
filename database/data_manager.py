@@ -472,27 +472,38 @@ class DatabaseManager:
             return pd.DataFrame()
     
     async def get_market_data(self, ticker: str, timeframe: str = '15m',
-                            hours: int = 24) -> pd.DataFrame:
+                            hours: int = 24, from_date: Optional[str] = None,
+                            to_date: Optional[str] = None) -> pd.DataFrame:
         """
         Get market data from database.
         
         Args:
             ticker: Stock symbol
             timeframe: Data timeframe
-            hours: Hours to look back
+            hours: Hours to look back (ignored if date range provided)
+            from_date: Start date (YYYY-MM-DD format)
+            to_date: End date (YYYY-MM-DD format)
             
         Returns:
             pd.DataFrame: Market data
         """
         try:
-            query = """
-                SELECT * FROM market_data 
-                WHERE ticker = ? AND timeframe = ? AND timestamp > ?
-                ORDER BY timestamp ASC
-            """
-            
-            cutoff_time = datetime.now() - timedelta(hours=hours)
-            params = [ticker, timeframe, cutoff_time]
+            if from_date and to_date:
+                query = """
+                    SELECT * FROM market_data 
+                    WHERE ticker = ? AND timeframe = ? 
+                    AND DATE(timestamp) BETWEEN ? AND ?
+                    ORDER BY timestamp ASC
+                """
+                params = [ticker, timeframe, from_date, to_date]
+            else:
+                query = """
+                    SELECT * FROM market_data 
+                    WHERE ticker = ? AND timeframe = ? AND timestamp > ?
+                    ORDER BY timestamp ASC
+                """
+                cutoff_time = datetime.now() - timedelta(hours=hours)
+                params = [ticker, timeframe, cutoff_time]
             
             df = pd.read_sql_query(query, await self.connection, params=params)
             return df
@@ -540,6 +551,81 @@ class DatabaseManager:
             
         except Exception as e:
             self.logger.error(f"Failed to update daily performance: {str(e)}")
+            return False
+    
+    async def get_latest_data_date(self, tickers: List[str], timeframe: str = '15m') -> Optional[str]:
+        """
+        Get the latest data date for given tickers and timeframe.
+        
+        Args:
+            tickers: List of stock symbols
+            timeframe: Data timeframe
+            
+        Returns:
+            str: Latest date in YYYY-MM-DD format, or None if no data exists
+        """
+        try:
+            placeholders = ','.join(['?' for _ in tickers])
+            query = f"""
+                SELECT MAX(DATE(timestamp)) as latest_date
+                FROM market_data 
+                WHERE ticker IN ({placeholders}) AND timeframe = ?
+            """
+            
+            cursor = await self.connection.execute(query, tickers + [timeframe])
+            result = await cursor.fetchone()
+            
+            if result and result[0]:
+                self.logger.info(f"Latest data date found: {result[0]}")
+                return result[0]
+            else:
+                self.logger.info("No existing data found")
+                return None
+                
+        except Exception as e:
+            self.logger.error(f"Failed to get latest data date: {str(e)}")
+            return None
+    
+    async def append_market_data(self, ticker: str, df: pd.DataFrame, 
+                               timeframe: str = '15m') -> bool:
+        """
+        Append new market data to database (incremental update).
+        
+        Args:
+            ticker: Stock symbol
+            df: DataFrame with new OHLCV and indicator data
+            timeframe: Data timeframe
+            
+        Returns:
+            bool: Success status
+        """
+        try:
+            # Get latest date to avoid duplicates
+            latest_date = await self.get_latest_data_date([ticker], timeframe)
+            
+            if latest_date:
+                # Filter out data that's already in database
+                df['date'] = pd.to_datetime(df.index if 'timestamp' not in df.columns else df['timestamp']).dt.date
+                latest_date_obj = datetime.strptime(latest_date, '%Y-%m-%d').date()
+                df_new = df[df['date'] > latest_date_obj].copy()
+                df_new = df_new.drop('date', axis=1)
+            else:
+                df_new = df.copy()
+            
+            if df_new.empty:
+                self.logger.info(f"No new data to append for {ticker}")
+                return True
+            
+            # Use existing save_market_data method
+            result = await self.save_market_data(ticker, df_new, timeframe)
+            
+            if result:
+                self.logger.info(f"Successfully appended {len(df_new)} new records for {ticker}")
+            
+            return result
+            
+        except Exception as e:
+            self.logger.error(f"Failed to append market data for {ticker}: {str(e)}")
             return False
     
     async def log_system_event(self, level: str, component: str, 

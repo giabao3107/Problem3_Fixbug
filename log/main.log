@@ -356,3 +356,58 @@ telegram.error.Conflict: Conflict: terminated by other getUpdates request; make 
 2025-09-13 21:04:37,468 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
 2025-09-13 21:04:47,662 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
 2025-09-13 21:04:57,849 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:05:08,032 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:05:18,222 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:05:28,413 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:05:38,591 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:05:48,788 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:05:58,973 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:06:09,151 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:06:19,340 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:06:29,539 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:06:39,726 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:06:49,911 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:07:00,102 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:07:10,287 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:07:20,472 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:07:30,658 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:07:40,856 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:07:51,054 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:08:01,246 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 21:08:11,439 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:17:29,785 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
+2025-09-13 22:17:29,785 - realtime_alert - INFO - Initializing FiinQuant data adapter
+2025-09-13 22:17:29,786 - realtime_alert - ERROR - Failed to initialize components: 'FiinQuantAdapter' object has no attribute 'logger'
+2025-09-13 22:17:29,786 - root - ERROR - Monitor failed: 'FiinQuantAdapter' object has no attribute 'logger'
+2025-09-13 22:25:11,143 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
+2025-09-13 22:25:11,143 - realtime_alert - INFO - Initializing FiinQuant data adapter
+2025-09-13 22:25:11,144 - utils.fiinquant_adapter - INFO - Advanced caching enabled
+2025-09-13 22:25:14,186 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
+2025-09-13 22:25:14,187 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
+2025-09-13 22:25:14,187 - realtime_alert - INFO - All components initialized successfully
+2025-09-13 22:25:14,188 - realtime_alert - INFO - Starting Real-time Monitor
+2025-09-13 22:25:14,194 - database.data_manager - INFO - Database tables created/verified
+2025-09-13 22:25:14,194 - database.data_manager - INFO - Database initialized: database/trading_data.db
+2025-09-13 22:25:14,195 - utils.fiinquant_adapter - INFO - Attempting to login to FiinQuant (attempt 1)
+2025-09-13 22:25:14,425 - utils.fiinquant_adapter - INFO - Successfully logged in to FiinQuant
+2025-09-13 22:25:15,466 - jobs.telegram_bot - INFO - Telegram bot initialized
+2025-09-13 22:25:16,069 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getMe "HTTP/1.1 200 OK"
+2025-09-13 22:25:16,070 - telegram.ext.Application - INFO - Application started
+2025-09-13 22:25:16,266 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/deleteWebhook "HTTP/1.1 200 OK"
+2025-09-13 22:25:16,267 - jobs.telegram_bot - INFO - Telegram bot started
+2025-09-13 22:25:17,689 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 22:25:19,407 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 22:25:19,410 - realtime_alert - INFO - Scheduled tasks configured
+2025-09-13 22:25:19,410 - realtime_alert - INFO - Starting main monitoring loop
+2025-09-13 22:25:27,490 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:25:37,690 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:25:47,892 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:25:58,098 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:26:08,300 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:26:18,504 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:26:28,705 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:26:38,907 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:26:49,109 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:26:59,312 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:27:09,513 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 22:27:19,718 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"

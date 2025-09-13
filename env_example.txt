@@ -6,6 +6,13 @@ FIINQUANT_PASSWORD=Fiinquant0606
 TELEGRAM_BOT_TOKEN=8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI
 TELEGRAM_CHAT_ID=1818962950
 
+# Email Notification Configuration
+EMAIL_SENDER=your_email@gmail.com
+EMAIL_PASSWORD=your_app_password
+EMAIL_RECIPIENTS=recipient1@gmail.com,recipient2@gmail.com
+EMAIL_SMTP_SERVER=smtp.gmail.com
+EMAIL_SMTP_PORT=587
+
 # System Configuration
 REFRESH_INTERVAL_SECONDS=60
 TIMEFRAME=15m

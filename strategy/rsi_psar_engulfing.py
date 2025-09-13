@@ -10,6 +10,13 @@ from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
 import logging
 
+# Import cache manager
+try:
+    from utils.cache_manager import get_cache_manager, cached
+    CACHE_AVAILABLE = True
+except ImportError:
+    CACHE_AVAILABLE = False
+
 from utils.indicators import TechnicalIndicators
 from utils.helpers import DataCache
 from strategy.risk_management import RiskManager
@@ -82,6 +89,7 @@ class RSIPSAREngulfingStrategy:
         
         self.logger = logging.getLogger(__name__)
     
+    @cached(get_cache_manager(), prefix="strategy_analysis", ttl=300) if CACHE_AVAILABLE else lambda x: x
     def analyze_ticker(self, ticker: str, df: pd.DataFrame) -> List[TradingSignal]:
         """
         Analyze a ticker and generate trading signals.
@@ -116,6 +124,7 @@ class RSIPSAREngulfingStrategy:
             self.logger.error(f"Error analyzing {ticker}: {str(e)}")
             return []
     
+    @cached(get_cache_manager(), prefix="indicators", ttl=600) if CACHE_AVAILABLE else lambda x: x
     def _calculate_indicators(self, df: pd.DataFrame) -> pd.DataFrame:
         """Calculate all technical indicators."""
         return TechnicalIndicators.calculate_all_indicators(
@@ -549,3 +558,196 @@ class RSIPSAREngulfingStrategy:
         }
         
         return stats
+    
+    def generate_automated_strategy(self, tickers: List[str], market_data: Dict[str, pd.DataFrame]) -> Dict[str, Any]:
+        """
+        Generate automated trading strategy for multiple stocks.
+        
+        Args:
+            tickers: List of stock symbols to analyze
+            market_data: Dictionary mapping ticker to OHLCV DataFrame
+            
+        Returns:
+            Dict containing buy_list, sell_list, risk_warnings, and summary
+        """
+        buy_list = []
+        sell_list = []
+        risk_warnings = []
+        analysis_summary = {
+            'total_analyzed': 0,
+            'buy_candidates': 0,
+            'sell_candidates': 0,
+            'risk_alerts': 0,
+            'avg_buy_confidence': 0.0,
+            'avg_sell_confidence': 0.0
+        }
+        
+        for ticker in tickers:
+            if ticker not in market_data or market_data[ticker].empty:
+                self.logger.warning(f"No data available for {ticker}")
+                continue
+                
+            try:
+                # Analyze ticker and get signals
+                signals = self.analyze_ticker(ticker, market_data[ticker])
+                analysis_summary['total_analyzed'] += 1
+                
+                # Process signals
+                for signal in signals:
+                    self.add_signal_to_history(signal)
+                    
+                    if signal.signal_type == 'buy':
+                        buy_recommendation = self._create_buy_recommendation(signal, market_data[ticker])
+                        buy_list.append(buy_recommendation)
+                        analysis_summary['buy_candidates'] += 1
+                        
+                    elif signal.signal_type == 'sell':
+                        sell_recommendation = self._create_sell_recommendation(signal)
+                        sell_list.append(sell_recommendation)
+                        analysis_summary['sell_candidates'] += 1
+                        
+                    elif signal.signal_type == 'risk_warning':
+                        risk_alert = self._create_risk_alert(signal)
+                        risk_warnings.append(risk_alert)
+                        analysis_summary['risk_alerts'] += 1
+                        
+            except Exception as e:
+                self.logger.error(f"Error processing {ticker}: {str(e)}")
+                continue
+        
+        # Calculate average confidences
+        if buy_list:
+            analysis_summary['avg_buy_confidence'] = sum(item['confidence'] for item in buy_list) / len(buy_list)
+        if sell_list:
+            analysis_summary['avg_sell_confidence'] = sum(item['confidence'] for item in sell_list) / len(sell_list)
+        
+        # Sort recommendations by confidence
+        buy_list.sort(key=lambda x: x['confidence'], reverse=True)
+        sell_list.sort(key=lambda x: x['confidence'], reverse=True)
+        risk_warnings.sort(key=lambda x: x['confidence'], reverse=True)
+        
+        return {
+            'buy_list': buy_list,
+            'sell_list': sell_list,
+            'risk_warnings': risk_warnings,
+            'summary': analysis_summary,
+            'timestamp': datetime.now()
+        }
+    
+    def _create_buy_recommendation(self, signal: TradingSignal, df: pd.DataFrame) -> Dict[str, Any]:
+        """Create detailed buy recommendation from signal."""
+        current_row = df.iloc[-1]
+        
+        # Calculate position sizing based on risk management
+        position_size = self.risk_manager.calculate_position_size(
+            signal.entry_price, 
+            signal.stop_loss or self._calculate_stop_loss(signal.entry_price, 'long')
+        )
+        
+        return {
+            'ticker': signal.ticker,
+            'action': 'BUY',
+            'confidence': signal.confidence,
+            'entry_price': signal.entry_price,
+            'stop_loss': signal.stop_loss,
+            'take_profit': signal.take_profit,
+            'position_size': position_size,
+            'reason': signal.reason,
+            'technical_data': {
+                'rsi': signal.metadata.get('rsi', 0),
+                'psar': signal.metadata.get('psar', 0),
+                'volume_anomaly': signal.metadata.get('volume_anomaly', 0),
+                'engulfing_signal': signal.metadata.get('engulfing_signal', 0)
+            },
+            'risk_reward_ratio': self._calculate_risk_reward_ratio(signal),
+            'timestamp': signal.timestamp
+        }
+    
+    def _create_sell_recommendation(self, signal: TradingSignal) -> Dict[str, Any]:
+        """Create detailed sell recommendation from signal."""
+        current_state = self.ticker_states.get(signal.ticker)
+        
+        return {
+            'ticker': signal.ticker,
+            'action': 'SELL',
+            'confidence': signal.confidence,
+            'current_price': signal.entry_price,
+            'entry_price': current_state.entry_price if current_state else None,
+            'pnl_percent': signal.metadata.get('pnl_percent', 0),
+            'days_held': signal.metadata.get('days_held', 0),
+            'reason': signal.reason,
+            'timestamp': signal.timestamp
+        }
+    
+    def _create_risk_alert(self, signal: TradingSignal) -> Dict[str, Any]:
+        """Create detailed risk alert from signal."""
+        return {
+            'ticker': signal.ticker,
+            'alert_type': 'RISK_WARNING',
+            'confidence': signal.confidence,
+            'current_price': signal.entry_price,
+            'risk_factors': signal.reason,
+            'metadata': signal.metadata,
+            'timestamp': signal.timestamp
+        }
+    
+    def _calculate_risk_reward_ratio(self, signal: TradingSignal) -> float:
+        """Calculate risk-reward ratio for a signal."""
+        if not signal.stop_loss or not signal.take_profit:
+            return 0.0
+            
+        risk = abs(signal.entry_price - signal.stop_loss)
+        reward = abs(signal.take_profit - signal.entry_price)
+        
+        return reward / risk if risk > 0 else 0.0
+    
+    def get_portfolio_recommendations(self, max_positions: int = 10, min_confidence: float = 0.7) -> Dict[str, Any]:
+        """
+        Get filtered portfolio recommendations based on constraints.
+        
+        Args:
+            max_positions: Maximum number of positions to recommend
+            min_confidence: Minimum confidence threshold
+            
+        Returns:
+            Filtered recommendations with portfolio allocation
+        """
+        # Get recent signals
+        recent_signals = [s for s in self.signal_history[-100:] if s.confidence >= min_confidence]
+        
+        # Group by ticker and get latest signal for each
+        latest_signals = {}
+        for signal in recent_signals:
+            if signal.ticker not in latest_signals or signal.timestamp > latest_signals[signal.ticker].timestamp:
+                latest_signals[signal.ticker] = signal
+        
+        # Filter buy signals
+        buy_signals = [s for s in latest_signals.values() if s.signal_type == 'buy']
+        buy_signals.sort(key=lambda x: x.confidence, reverse=True)
+        
+        # Limit to max positions
+        selected_signals = buy_signals[:max_positions]
+        
+        # Calculate portfolio allocation
+        total_confidence = sum(s.confidence for s in selected_signals)
+        portfolio_allocation = []
+        
+        for signal in selected_signals:
+            weight = signal.confidence / total_confidence if total_confidence > 0 else 1.0 / len(selected_signals)
+            
+            portfolio_allocation.append({
+                'ticker': signal.ticker,
+                'weight': weight,
+                'confidence': signal.confidence,
+                'entry_price': signal.entry_price,
+                'stop_loss': signal.stop_loss,
+                'take_profit': signal.take_profit,
+                'reason': signal.reason
+            })
+        
+        return {
+            'portfolio_allocation': portfolio_allocation,
+            'total_positions': len(portfolio_allocation),
+            'avg_confidence': sum(p['confidence'] for p in portfolio_allocation) / len(portfolio_allocation) if portfolio_allocation else 0,
+            'timestamp': datetime.now()
+        }

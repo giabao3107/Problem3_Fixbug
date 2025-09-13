@@ -54,12 +54,26 @@ alerts:
     debounce_minutes: 5  # Minimum time between same alerts
     max_alerts_per_hour: 20
     
+  email:
+    enabled: true
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    sender_email: ""  # Set in .env file
+    sender_password: ""  # Set in .env file
+    recipient_emails: []  # Set in .env file
+    debounce_minutes: 15  # Minimum time between same email alerts
+    max_emails_per_hour: 10
+    send_daily_summary: true
+    daily_summary_time: "17:00"  # Send daily summary at 5 PM
+    
   # Alert Types
   types:
     buy_signal: true
     sell_signal: true  
     risk_warning: true
     volume_anomaly: true
+    daily_summary: true
+    portfolio_update: true
     
 # Market Settings
 market:
@@ -95,8 +109,30 @@ logging:
     signals: "log/signals.log"
     errors: "log/errors.log"
     
+# Caching Configuration
+cache:
+  # Redis settings (optional, falls back to memory cache)
+  redis_host: "localhost"
+  redis_port: 6379
+  redis_db: 0
+  redis_password: null  # Set in .env file if needed
+  use_redis: true
+  
+  # Memory cache settings
+  memory_cache_size: 1000  # Maximum items in memory
+  default_ttl: 300  # Default time-to-live in seconds
+  
+  # Cache strategies for different data types
+  strategies:
+    market_data: 60      # Market data cache TTL (seconds)
+    strategy_results: 300 # Strategy calculation cache TTL
+    historical_data: 3600 # Historical data cache TTL (1 hour)
+    configuration: 1800   # Config cache TTL (30 minutes)
+    session_data: 600     # Session/auth cache TTL (10 minutes)
+
 # Performance Monitoring
 monitoring:
   latency_threshold: 5   # seconds
   memory_threshold: 512  # MB
   alert_on_high_latency: true
+  cache_hit_ratio_threshold: 0.8  # Alert if cache hit ratio drops below 80%

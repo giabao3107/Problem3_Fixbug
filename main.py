@@ -23,6 +23,7 @@ load_dotenv()
 
 from utils.helpers import load_config, get_env_variable, setup_logging
 from jobs.realtime_monitor import RealtimeMonitor
+from jobs.main_orchestrator import MainOrchestrator
 from jobs.telegram_bot import TradingTelegramBot
 from utils.logger import initialize_global_logger
 
@@ -157,6 +158,27 @@ def run_tests(args):
         return 1
 
 
+def run_main_orchestrator(args):
+    """Run the main orchestrator (recommended)."""
+    print("🚀 Starting Main Orchestrator (Full System)...")
+    
+    if not check_environment():
+        return 1
+    
+    try:
+        # Create and run orchestrator
+        orchestrator = MainOrchestrator(config_path=args.config)
+        
+        asyncio.run(orchestrator.start())
+        
+    except KeyboardInterrupt:
+        print("\n📴 Shutting down Main Orchestrator...")
+        return 0
+    except Exception as e:
+        logging.error(f"Main Orchestrator failed: {str(e)}")
+        return 1
+
+
 def run_all_services(args):
     """Run all services simultaneously."""
     print("🚀 Starting All Services...")
@@ -252,10 +274,11 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python main.py monitor              # Run realtime monitor
+  python main.py orchestrator         # Run main orchestrator (recommended)
+  python main.py monitor              # Run realtime monitor only
   python main.py dashboard            # Run Streamlit dashboard  
   python main.py bot                  # Run Telegram bot
-  python main.py all                  # Run all services
+  python main.py all                  # Run all services separately
   python main.py test --coverage      # Run tests with coverage
   python main.py setup                # Setup project
         """
@@ -271,8 +294,11 @@ Examples:
     # Subcommands
     subparsers = parser.add_subparsers(dest='command', help='Available commands')
     
+    # Main orchestrator command (recommended)
+    orchestrator_parser = subparsers.add_parser('orchestrator', help='Run main orchestrator (recommended - includes all features)')
+    
     # Monitor command
-    monitor_parser = subparsers.add_parser('monitor', help='Run realtime monitor')
+    monitor_parser = subparsers.add_parser('monitor', help='Run realtime monitor only')
     
     # Dashboard command
     dashboard_parser = subparsers.add_parser('dashboard', help='Run Streamlit dashboard')
@@ -281,7 +307,7 @@ Examples:
     bot_parser = subparsers.add_parser('bot', help='Run Telegram bot')
     
     # All services command
-    all_parser = subparsers.add_parser('all', help='Run all services')
+    all_parser = subparsers.add_parser('all', help='Run all services separately')
     
     # Test command
     test_parser = subparsers.add_parser('test', help='Run tests')
@@ -311,7 +337,9 @@ Examples:
     print("="*60)
     
     # Route to appropriate handler
-    if args.command == 'monitor':
+    if args.command == 'orchestrator':
+        return run_main_orchestrator(args)
+    elif args.command == 'monitor':
         return run_realtime_monitor(args)
     elif args.command == 'dashboard':
         return run_streamlit_dashboard(args)
@@ -327,7 +355,8 @@ Examples:
         parser.print_help()
         print("\n💡 Quick start:")
         print("   python main.py setup        # First time setup")
-        print("   python main.py all          # Run with FiinQuant data")
+        print("   python main.py orchestrator # Run full system (recommended)")
+        print("   python main.py all          # Run services separately")
         return 1
 
 

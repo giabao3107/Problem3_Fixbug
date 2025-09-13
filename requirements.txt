@@ -24,6 +24,12 @@ talib-binary>=0.4.19
 # Telegram Bot
 python-telegram-bot>=20.0
 
+# Email notifications
+jinja2>=3.0.0
+
+# Caching
+redis>=4.0.0
+
 # Streamlit Dashboard  
 streamlit>=1.25.0
 plotly>=5.15.0

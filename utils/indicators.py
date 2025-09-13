@@ -268,17 +268,29 @@ class TechnicalIndicators:
                                psar_af_max: float = 0.20,
                                engulfing_min_body_ratio: float = 0.5,
                                volume_avg_period: int = 20,
-                               volume_anomaly_threshold: float = 1.0) -> pd.DataFrame:
+                               volume_anomaly_threshold: float = 1.0,
+                               incremental: bool = False,
+                               existing_df: Optional[pd.DataFrame] = None) -> pd.DataFrame:
         """
         Calculate all indicators for a complete dataset.
         
         Args:
             df: OHLCV DataFrame with columns: open, high, low, close, volume
             Other args: Individual indicator parameters
+            incremental: If True, calculate only for new data and merge with existing
+            existing_df: Existing DataFrame with indicators (required if incremental=True)
             
         Returns:
             pd.DataFrame: Original data with added indicator columns
         """
+        # Handle incremental calculation
+        if incremental and existing_df is not None:
+            return TechnicalIndicators._calculate_incremental(
+                df, existing_df, rsi_period, psar_af_init, psar_af_step, 
+                psar_af_max, engulfing_min_body_ratio, volume_avg_period, 
+                volume_anomaly_threshold
+            )
+        
         result_df = df.copy()
         
         # Ensure required columns exist
@@ -341,6 +353,56 @@ class TechnicalIndicators:
                 result_df.iloc[i, result_df.columns.get_loc('engulfing_body_size_ratio')] = ratio
         
         return result_df
+    
+    @staticmethod
+    def _calculate_incremental(new_df: pd.DataFrame, existing_df: pd.DataFrame,
+                             rsi_period: int, psar_af_init: float, psar_af_step: float,
+                             psar_af_max: float, engulfing_min_body_ratio: float,
+                             volume_avg_period: int, volume_anomaly_threshold: float) -> pd.DataFrame:
+        """
+        Calculate indicators incrementally for new data only.
+        
+        Args:
+            new_df: New OHLCV data to calculate indicators for
+            existing_df: Existing data with already calculated indicators
+            Other args: Indicator parameters
+            
+        Returns:
+            pd.DataFrame: Combined data with indicators
+        """
+        if new_df.empty:
+            return existing_df
+        
+        # Determine how much historical data we need for accurate calculation
+        max_lookback = max(rsi_period, volume_avg_period, 3)  # 3 for engulfing pattern
+        
+        # Get sufficient historical data for context
+        if len(existing_df) >= max_lookback:
+            context_df = existing_df.tail(max_lookback)
+        else:
+            context_df = existing_df
+        
+        # Combine context data with new data for calculation
+        combined_df = pd.concat([context_df, new_df], ignore_index=False)
+        
+        # Calculate indicators on combined data
+        full_result = TechnicalIndicators.calculate_all_indicators(
+            combined_df, rsi_period, psar_af_init, psar_af_step,
+            psar_af_max, engulfing_min_body_ratio, volume_avg_period,
+            volume_anomaly_threshold, incremental=False
+        )
+        
+        # Extract only the new data portion with calculated indicators
+        new_data_start_idx = len(context_df)
+        new_result = full_result.iloc[new_data_start_idx:].copy()
+        
+        # Combine existing data (unchanged) with new calculated data
+        if not existing_df.empty:
+            final_result = pd.concat([existing_df, new_result], ignore_index=False)
+        else:
+            final_result = new_result
+        
+        return final_result
 
 
 class IndicatorValidator:
