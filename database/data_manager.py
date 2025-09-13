@@ -67,11 +67,12 @@ class DatabaseManager:
                 timeframe TEXT,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
-            
-            CREATE INDEX IF NOT EXISTS idx_signals_timestamp ON signals(timestamp);
-            CREATE INDEX IF NOT EXISTS idx_signals_ticker ON signals(ticker);
-            CREATE INDEX IF NOT EXISTS idx_signals_signal_type ON signals(signal_type);
         """)
+        
+        # Create indexes for signals table
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_signals_timestamp ON signals(timestamp)")
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_signals_ticker ON signals(ticker)")
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_signals_signal_type ON signals(signal_type)")
         
         # Market data table  
         await self.connection.execute("""
@@ -92,11 +93,12 @@ class DatabaseManager:
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE(timestamp, ticker, timeframe)
             )
-            
-            CREATE INDEX IF NOT EXISTS idx_market_data_timestamp ON market_data(timestamp);
-            CREATE INDEX IF NOT EXISTS idx_market_data_ticker ON market_data(ticker);
-            CREATE INDEX IF NOT EXISTS idx_market_data_timeframe ON market_data(timeframe);
         """)
+        
+        # Create indexes for market_data table
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_market_data_timestamp ON market_data(timestamp)")
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_market_data_ticker ON market_data(ticker)")
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_market_data_timeframe ON market_data(timeframe)")
         
         # Trades table
         await self.connection.execute("""
@@ -119,11 +121,12 @@ class DatabaseManager:
                 exit_reason TEXT,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
-            
-            CREATE INDEX IF NOT EXISTS idx_trades_ticker ON trades(ticker);
-            CREATE INDEX IF NOT EXISTS idx_trades_entry_date ON trades(entry_date);
-            CREATE INDEX IF NOT EXISTS idx_trades_status ON trades(status);
         """)
+        
+        # Create indexes for trades table
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_trades_ticker ON trades(ticker)")
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_trades_entry_date ON trades(entry_date)")
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_trades_status ON trades(status)")
         
         # Performance metrics table
         await self.connection.execute("""
@@ -156,11 +159,12 @@ class DatabaseManager:
                 details TEXT,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
-            
-            CREATE INDEX IF NOT EXISTS idx_system_logs_timestamp ON system_logs(timestamp);
-            CREATE INDEX IF NOT EXISTS idx_system_logs_level ON system_logs(level);
-            CREATE INDEX IF NOT EXISTS idx_system_logs_component ON system_logs(component);
         """)
+        
+        # Create indexes for system_logs table
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_system_logs_timestamp ON system_logs(timestamp)")
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_system_logs_level ON system_logs(level)")
+        await self.connection.execute("CREATE INDEX IF NOT EXISTS idx_system_logs_component ON system_logs(component)")
         
         await self.connection.commit()
         self.logger.info("Database tables created/verified")

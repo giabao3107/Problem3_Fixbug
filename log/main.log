@@ -49,3 +49,56 @@
 2025-09-13 14:33:18,692 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
 2025-09-13 14:33:18,695 - database.data_manager - INFO - Database connection closed
 2025-09-13 14:33:18,697 - realtime_alert - INFO - Shutdown completed
+2025-09-13 20:00:24,703 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
+2025-09-13 20:00:24,704 - realtime_alert - INFO - Initializing FiinQuant data adapter
+2025-09-13 20:00:30,565 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
+2025-09-13 20:00:30,566 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
+2025-09-13 20:00:30,566 - realtime_alert - INFO - All components initialized successfully
+2025-09-13 20:00:30,567 - realtime_alert - INFO - Starting Real-time Monitor
+2025-09-13 20:00:30,573 - database.data_manager - ERROR - Failed to initialize database: near "CREATE": syntax error
+2025-09-13 20:00:30,573 - realtime_alert - ERROR - Failed to start monitor: near "CREATE": syntax error
+2025-09-13 20:00:30,573 - realtime_alert - INFO - Shutting down Real-time Monitor
+2025-09-13 20:00:31,935 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
+2025-09-13 20:00:31,936 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
+2025-09-13 20:00:31,936 - database.data_manager - INFO - Database connection closed
+2025-09-13 20:00:31,936 - realtime_alert - INFO - Shutdown completed
+2025-09-13 20:18:44,128 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
+2025-09-13 20:18:44,129 - realtime_alert - INFO - Initializing FiinQuant data adapter
+2025-09-13 20:18:46,414 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
+2025-09-13 20:18:46,416 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
+2025-09-13 20:18:46,416 - realtime_alert - INFO - All components initialized successfully
+2025-09-13 20:18:46,417 - realtime_alert - INFO - Starting Real-time Monitor
+2025-09-13 20:18:46,418 - database.data_manager - ERROR - Failed to initialize database: near "CREATE": syntax error
+2025-09-13 20:18:46,419 - realtime_alert - ERROR - Failed to start monitor: near "CREATE": syntax error
+2025-09-13 20:18:46,419 - realtime_alert - INFO - Shutting down Real-time Monitor
+2025-09-13 20:18:47,525 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
+2025-09-13 20:18:47,526 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
+2025-09-13 20:18:47,526 - database.data_manager - INFO - Database connection closed
+2025-09-13 20:18:47,527 - realtime_alert - INFO - Shutdown completed
+2025-09-13 20:20:51,338 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
+2025-09-13 20:20:51,339 - realtime_alert - INFO - Initializing FiinQuant data adapter
+2025-09-13 20:20:53,122 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
+2025-09-13 20:20:53,123 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
+2025-09-13 20:20:53,123 - realtime_alert - INFO - All components initialized successfully
+2025-09-13 20:20:53,124 - realtime_alert - INFO - Starting Real-time Monitor
+2025-09-13 20:20:53,184 - database.data_manager - INFO - Database tables created/verified
+2025-09-13 20:20:53,184 - database.data_manager - INFO - Database initialized: database/trading_data.db
+2025-09-13 20:20:53,184 - utils.fiinquant_adapter - INFO - Attempting to login to FiinQuant (attempt 1)
+2025-09-13 20:20:53,373 - utils.fiinquant_adapter - INFO - Successfully logged in to FiinQuant
+2025-09-13 20:20:54,299 - jobs.telegram_bot - INFO - Telegram bot initialized
+2025-09-13 20:20:54,948 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getMe "HTTP/1.1 200 OK"
+2025-09-13 20:20:54,948 - telegram.ext.Application - INFO - Application started
+2025-09-13 20:20:55,157 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/deleteWebhook "HTTP/1.1 200 OK"
+2025-09-13 20:20:55,157 - jobs.telegram_bot - INFO - Telegram bot started
+2025-09-13 20:20:57,005 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 20:20:58,521 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 20:20:58,521 - realtime_alert - INFO - Scheduled tasks configured
+2025-09-13 20:20:58,521 - realtime_alert - INFO - Starting main monitoring loop
+2025-09-13 20:21:06,653 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 20:21:16,865 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 20:21:27,073 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 20:21:37,281 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 20:21:47,485 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 20:21:57,698 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 20:22:07,898 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 20:22:18,113 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
