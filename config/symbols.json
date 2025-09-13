@@ -1,0 +1,66 @@
+{
+  "universe": {
+    "vn30": [
+      "ACB", "BCM", "BID", "BVH", "CTG", "FPT", "GAS", "GVR", "HDB", "HPG",
+      "KDH", "KDC", "MBB", "MSN", "MWG", "NVL", "PDR", "PLX", "POW", "SAB",
+      "SHB", "SSB", "SSI", "STB", "TCB", "TPB", "VCB", "VHM", "VIC", "VJC",
+      "VNM", "VPB", "VRE"
+    ],
+    "hose_liquid": [
+      "ACB", "BCM", "BID", "BVH", "CTG", "FPT", "GAS", "GVR", "HDB", "HPG",
+      "KDH", "KDC", "MBB", "MSN", "MWG", "NVL", "PDR", "PLX", "POW", "SAB",
+      "SHB", "SSB", "SSI", "STB", "TCB", "TPB", "VCB", "VHM", "VIC", "VJC",
+      "VNM", "VPB", "VRE", "AAA", "ABR", "ACV", "AGG", "ANV", "APG", "ASP",
+      "ASM", "BAF", "BBC", "BBS", "BCG", "BFC", "BHN", "BIC", "BMI", "BRC",
+      "BSI", "BTP", "BTS", "BWE", "C32", "C47", "CAV", "CII", "CMG", "CMV",
+      "CMX", "CRC", "CRE", "CSM", "CTD", "CTF", "CTI", "CTS", "CVT", "DAG",
+      "DBD", "DC4", "DGC", "DGW", "DHC", "DHG", "DIG", "DLG", "DMC", "DPM",
+      "DPR", "DRC", "DRH", "DSN", "DTA", "DTL", "DXG", "DXS", "EIB", "EVF",
+      "EVG", "FRT", "FTS", "GEG", "GMD", "HAG", "HAH", "HCM", "HDC", "HDG",
+      "HHS", "HNG", "HSG", "HT1", "HTN", "HU1", "HVH", "HVN", "IBC", "IJC",
+      "IMP", "ITA", "ITC", "JVC", "KBC", "KMR", "LAF", "LBM", "LCG", "LCM",
+      "LDG", "LGC", "LHG", "LIX", "LPB", "LSS", "MCP", "MDG", "MIG", "MSB",
+      "MSH", "NAF", "NAV", "NBC", "NCT", "NHA", "NHH", "NKG", "NLG", "NNC",
+      "NSC", "NT2", "NTL", "OCB", "OGC", "ORS", "PAN", "PC1", "PET", "PGC",
+      "PGD", "PGV", "PHC", "PHR", "PIT", "PLP", "PME", "PNC", "PNJ", "PSH",
+      "PTB", "PVD", "PVS", "PVT", "PXI", "RAL", "ROS", "S4A", "SAM", "SBT",
+      "SCD", "SCR", "SCS", "SFG", "SFI", "SGN", "SGR", "SGT", "SHI", "SHS",
+      "SJF", "SKG", "SMB", "SMC", "SRC", "SRF", "SSC", "SVC", "SVD", "SVT",
+      "SZC", "SZL", "TDC", "TDG", "TDH", "TDM", "TDP", "TGG", "THG", "TIX",
+      "TLD", "TLG", "TLH", "TMT", "TNA", "TNG", "TNH", "TNI", "TPC", "TRA",
+      "TRC", "TSC", "TTA", "TTF", "TYA", "UIC", "VCF", "VCG", "VCI", "VDS",
+      "VGC", "VHC", "VHL", "VIB", "VID", "VIP", "VIS", "VIX", "VJC", "VMD",
+      "VND", "VNG", "VNS", "VOS", "VPD", "VPS", "VRC", "VSC", "VSH", "VSI",
+      "VTO", "VTZ", "YBM", "YEG"
+    ],
+    "hnx_liquid": [
+      "CEO", "HUT", "IDC", "LAS", "MBS", "NRC", "PLC", "PVS", "SHB", "TNG",
+      "VCS", "VGS", "API", "BVS", "DDG", "HLD", "IDV", "PVB", "SLS", "TIG",
+      "VND"
+    ],
+    "upcom_selected": [
+      "ABI", "APS", "BSR", "CCI", "DAH", "DQC", "HHG", "MCF", "MCH", "MCS",
+      "SD1", "SD2", "SD3", "SD4", "SD5", "SD6", "SD7", "SD8", "SD9", "SDA"
+    ],
+    "all_exchanges": true
+  },
+  "watchlist": {
+    "tech_stocks": ["FPT", "CMG", "ELC", "ITD", "SAM"],
+    "banking": ["ACB", "BID", "CTG", "HDB", "MBB", "STB", "TCB", "VCB", "VPB"],
+    "real_estate": ["DXG", "HQC", "KBC", "KDH", "NLG", "NVL", "PDR", "VHM", "VIC", "VRE"],
+    "manufacturing": ["DHG", "HPG", "HSG", "NKG", "PNJ", "SAB", "SMC", "VNM"],
+    "energy": ["GAS", "NT2", "PC1", "PGC", "PLX", "POW", "PVD", "PVS", "PVT"],
+    "finance": ["BVH", "MIG", "PVI", "SHS", "SSI", "VCI", "VDS", "VIX", "VND"]
+  },
+  "excluded": {
+    "suspended": [],
+    "delisted": [],
+    "warning": []
+  },
+  "metadata": {
+    "last_updated": "2025-09-13",
+    "total_symbols": "all",
+    "source": "HOSE, HNX, UPCOM listings",
+    "criteria": "All symbols from all exchanges"
+  }
+}

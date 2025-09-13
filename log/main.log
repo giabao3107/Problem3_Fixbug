@@ -1,0 +1,51 @@
+2025-09-13 00:51:22,018 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
+2025-09-13 00:51:22,018 - realtime_alert - INFO - Initializing FiinQuant data adapter
+2025-09-13 00:51:22,019 - realtime_alert - INFO - Monitoring 33 symbols
+2025-09-13 00:51:22,019 - realtime_alert - INFO - All components initialized successfully
+2025-09-13 00:51:22,020 - realtime_alert - INFO - Starting Real-time Monitor
+2025-09-13 00:51:22,021 - database.data_manager - ERROR - Failed to initialize database: near "INDEX": syntax error
+2025-09-13 00:51:22,022 - realtime_alert - ERROR - Failed to start monitor: near "INDEX": syntax error
+2025-09-13 00:51:22,022 - realtime_alert - INFO - Shutting down Real-time Monitor
+2025-09-13 00:51:23,223 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
+2025-09-13 00:51:23,224 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
+2025-09-13 00:51:23,224 - database.data_manager - INFO - Database connection closed
+2025-09-13 00:51:23,224 - realtime_alert - INFO - Shutdown completed
+2025-09-13 12:34:34,146 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
+2025-09-13 12:34:34,146 - realtime_alert - INFO - Initializing FiinQuant data adapter
+2025-09-13 12:34:34,146 - realtime_alert - INFO - Monitoring 33 symbols
+2025-09-13 12:34:34,146 - realtime_alert - INFO - All components initialized successfully
+2025-09-13 12:34:34,160 - realtime_alert - INFO - Starting Real-time Monitor
+2025-09-13 12:34:34,165 - database.data_manager - ERROR - Failed to initialize database: near "INDEX": syntax error
+2025-09-13 12:34:34,165 - realtime_alert - ERROR - Failed to start monitor: near "INDEX": syntax error
+2025-09-13 12:34:34,165 - realtime_alert - INFO - Shutting down Real-time Monitor
+2025-09-13 12:34:35,893 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
+2025-09-13 12:34:35,893 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
+2025-09-13 12:34:35,898 - database.data_manager - INFO - Database connection closed
+2025-09-13 12:34:35,898 - realtime_alert - INFO - Shutdown completed
+2025-09-13 12:39:03,371 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
+2025-09-13 12:39:03,371 - realtime_alert - INFO - Initializing FiinQuant data adapter
+2025-09-13 12:39:03,371 - realtime_alert - INFO - Monitoring 33 symbols
+2025-09-13 12:39:03,371 - realtime_alert - INFO - All components initialized successfully
+2025-09-13 12:39:03,376 - realtime_alert - INFO - Starting Real-time Monitor
+2025-09-13 12:39:03,377 - database.data_manager - ERROR - Failed to initialize database: near "INDEX": syntax error
+2025-09-13 12:39:03,377 - realtime_alert - ERROR - Failed to start monitor: near "INDEX": syntax error
+2025-09-13 12:39:03,377 - realtime_alert - INFO - Shutting down Real-time Monitor
+2025-09-13 12:39:05,204 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
+2025-09-13 12:39:05,204 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
+2025-09-13 12:39:05,207 - database.data_manager - INFO - Database connection closed
+2025-09-13 12:39:05,207 - realtime_alert - INFO - Shutdown completed
+2025-09-13 12:50:07,391 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
+2025-09-13 12:50:07,391 - realtime_alert - INFO - Initializing FiinQuant data adapter
+2025-09-13 14:33:12,348 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
+2025-09-13 14:33:12,348 - realtime_alert - INFO - Initializing FiinQuant data adapter
+2025-09-13 14:33:17,158 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
+2025-09-13 14:33:17,161 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
+2025-09-13 14:33:17,161 - realtime_alert - INFO - All components initialized successfully
+2025-09-13 14:33:17,162 - realtime_alert - INFO - Starting Real-time Monitor
+2025-09-13 14:33:17,167 - database.data_manager - ERROR - Failed to initialize database: near "CREATE": syntax error
+2025-09-13 14:33:17,168 - realtime_alert - ERROR - Failed to start monitor: near "CREATE": syntax error
+2025-09-13 14:33:17,168 - realtime_alert - INFO - Shutting down Real-time Monitor
+2025-09-13 14:33:18,692 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
+2025-09-13 14:33:18,692 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
+2025-09-13 14:33:18,695 - database.data_manager - INFO - Database connection closed
+2025-09-13 14:33:18,697 - realtime_alert - INFO - Shutdown completed

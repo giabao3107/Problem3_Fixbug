@@ -1,0 +1,25 @@
+# FiinQuant Configuration (BẮT BUỘC)
+FIINQUANT_USERNAME=DSTC_17@fiinquant.vn
+FIINQUANT_PASSWORD=Fiinquant0606
+
+# Telegram Bot Configuration
+TELEGRAM_BOT_TOKEN=8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI
+TELEGRAM_CHAT_ID=1818962950
+
+# System Configuration
+REFRESH_INTERVAL_SECONDS=60
+TIMEFRAME=15m
+LOG_LEVEL=INFO
+TIMEZONE=Asia/Ho_Chi_Minh
+
+# Risk Management
+MAX_CONCURRENT_POSITIONS=10
+MAX_DAILY_LOSS_PERCENT=5.0
+POSITION_SIZE_PERCENT=2.0
+
+# Database Configuration (SQLite local file)
+DATABASE_PATH=./database/trading_data.db
+
+# Streamlit Configuration
+STREAMLIT_PORT=8501
+STREAMLIT_HOST=localhost

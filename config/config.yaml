@@ -1,0 +1,102 @@
+# Realtime Alert System Configuration
+
+# FiinQuant Data Source Settings
+data_source:
+  provider: "fiinquant"
+  timeframes: ["1m", "5m", "15m", "30m", "1h", "1d"]
+  default_timeframe: "15m"
+  retry_attempts: 3
+  retry_delay: 5  # seconds
+  cache_duration: 300  # seconds
+
+# Trading Strategy Configuration
+strategy:
+  name: "RSI_PSAR_Engulfing"
+  
+  # RSI Settings
+  rsi:
+    period: 14
+    overbought: 70
+    oversold: 30
+    neutral: 50
+    
+  # PSAR Settings  
+  psar:
+    af_init: 0.02
+    af_step: 0.02
+    af_max: 0.20
+    
+  # Engulfing Pattern Settings
+  engulfing:
+    detection_window: 2
+    min_body_ratio: 0.5
+    lookback_candles: 3
+    
+  # Volume Analysis
+  volume:
+    avg_period: 20
+    anomaly_threshold: 1.0  # Volume > AvgVolume * threshold
+    
+# Risk Management
+risk_management:
+  take_profit: 0.15      # 15%
+  stop_loss: 0.08        # 8%  
+  trailing_take_profit: 0.09  # 9%
+  trailing_stop: 0.03    # 3%
+  position_size: 0.02    # 2% of portfolio per trade
+  max_positions: 10
+  max_daily_loss: 0.05   # 5% of portfolio per day
+  
+# Alert Settings
+alerts:
+  telegram:
+    enabled: true
+    debounce_minutes: 5  # Minimum time between same alerts
+    max_alerts_per_hour: 20
+    
+  # Alert Types
+  types:
+    buy_signal: true
+    sell_signal: true  
+    risk_warning: true
+    volume_anomaly: true
+    
+# Market Settings
+market:
+  exchanges: ["HOSE", "HNX", "UPCOM"]
+  trading_hours:
+    start: "09:00"
+    end: "15:00"
+    timezone: "Asia/Ho_Chi_Minh"
+  
+  # Market filters
+  filters:
+    min_price: 1000      # VND
+    max_price: 1000000   # VND
+    min_volume: 10000    # shares
+    min_market_cap: 100  # billion VND (optional)
+    
+# Dashboard Settings
+dashboard:
+  refresh_interval: 10   # seconds
+  max_displayed_signals: 100
+  chart_timeframe: "15m"
+  
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  max_file_size: "10MB"
+  backup_count: 5
+  
+  # Log files
+  files:
+    main: "log/main.log"
+    signals: "log/signals.log"
+    errors: "log/errors.log"
+    
+# Performance Monitoring
+monitoring:
+  latency_threshold: 5   # seconds
+  memory_threshold: 512  # MB
+  alert_on_high_latency: true
