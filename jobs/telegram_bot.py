@@ -18,7 +18,8 @@ from telegram.ext import (
 )
 
 from utils.helpers import load_config, get_env_variable, format_currency, format_percentage
-from strategy.rsi_psar_engulfing import TradingSignal, StrategyState
+from strategy.rsi_psar_engulfing import TradingSignal, StrategyState, RSIPSAREngulfingStrategy
+from utils.fiinquant_adapter import FiinQuantAdapter
 
 
 class AlertDebouncer:
@@ -107,6 +108,8 @@ class TradingTelegramBot:
         self.application.add_handler(CommandHandler("help", self.help_command))
         self.application.add_handler(CommandHandler("status", self.status_command))
         self.application.add_handler(CommandHandler("top", self.top_command))
+        self.application.add_handler(CommandHandler("recommendations", self.recommendations_command))
+        self.application.add_handler(CommandHandler("send_recommendations", self.send_recommendations_command))
         self.application.add_handler(CommandHandler("positions", self.positions_command))
         self.application.add_handler(CommandHandler("settings", self.settings_command))
         self.application.add_handler(CallbackQueryHandler(self.button_handler))
@@ -314,6 +317,8 @@ class TradingTelegramBot:
             "/help - Hiển thị trợ giúp\n"
             "/status - Trạng thái hệ thống\n"
             "/top - Top cơ hội giao dịch\n" 
+            "/recommendations - Khuyến nghị mua/bán ngày mai\n"
+            "/send_recommendations - Gửi khuyến nghị ngay\n"
             "/positions - Vị thế hiện tại\n"
             "/settings - Cài đặt cá nhân\n\n"
             "🔔 Bot đã sẵn sàng gửi cảnh báo!"
@@ -330,6 +335,7 @@ class TradingTelegramBot:
             "/help - Hiển thị hướng dẫn này\n"
             "/status - Trạng thái hệ thống và thống kê\n"
             "/top - Top cơ hội mua/bán\n"
+            "/recommendations - Khuyến nghị mua/bán ngày mai\n"
             "/positions - Vị thế đang nắm giữ\n"
             "/settings - Cài đặt thông báo\n\n"
             
@@ -378,20 +384,20 @@ class TradingTelegramBot:
         await update.message.reply_text(status_text, parse_mode='Markdown')
     
     async def top_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /top command.""" 
-        top_text = (
-            "🔝 *TOP CƠ HỘI GIAO DỊCH*\n\n"
-            "📈 *Top mua (P_buy cao):*\n"
-            "Hiện tại chưa có tín hiệu\n\n"
-            
-            "📉 *Top bán (P_sell cao):*\n"
-            "Hiện tại chưa có tín hiệu\n\n"
-            
-            "⚠️ *Top cảnh báo rủi ro:*\n"
-            "Hiện tại chưa có cảnh báo\n\n"
-            
-            f"🕐 *Cập nhật:* {datetime.now().strftime('%H:%M:%S')}"
-        )
+        """Handle /top command."""
+        try:
+            # Generate current trading opportunities
+            recommendations = await self._generate_recommendations()
+            top_text = self._format_top_opportunities(recommendations)
+        except Exception as e:
+            self.logger.error(f"Failed to generate top opportunities: {str(e)}")
+            top_text = (
+                "🔝 *TOP CƠ HỘI GIAO DỊCH HIỆN TẠI*\n\n"
+                "❌ *Lỗi:* Không thể tải cơ hội giao dịch\n"
+                "Vui lòng thử lại sau.\n\n"
+                "💡 *Gợi ý:* Sử dụng /recommendations để xem khuyến nghị cho ngày mai\n\n"
+                f"🕐 *Cập nhật:* {datetime.now().strftime('%H:%M:%S')}"
+            )
         
         keyboard = [
             [InlineKeyboardButton("🔄 Làm mới", callback_data='refresh_top')]
@@ -403,6 +409,70 @@ class TradingTelegramBot:
             parse_mode='Markdown',
             reply_markup=reply_markup
         )
+    
+    async def recommendations_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Handle /recommendations command."""
+        try:
+            # Generate recommendations
+            recommendations = await self._generate_recommendations()
+            recommendations_text = self._format_recommendations(recommendations)
+        except Exception as e:
+            self.logger.error(f"Failed to generate recommendations: {str(e)}")
+            recommendations_text = (
+                "💡 *KHUYẾN NGHỊ MUA/BÁN NGÀY MAI*\n\n"
+                "❌ *Lỗi:* Không thể tạo khuyến nghị\n"
+                "Vui lòng thử lại sau.\n\n"
+                f"🕐 *Cập nhật:* {datetime.now().strftime('%H:%M:%S')}"
+            )
+        
+        keyboard = [
+            [InlineKeyboardButton("🔄 Làm mới", callback_data='refresh_recommendations')]
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        
+        await update.message.reply_text(
+            recommendations_text,
+            parse_mode='Markdown',
+            reply_markup=reply_markup
+        )
+    
+    async def send_recommendations_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Handle /send_recommendations command - send recommendations immediately."""
+        try:
+            # Send loading message
+            loading_msg = await update.message.reply_text(
+                "🔄 *Đang tạo khuyến nghị...*\n\nVui lòng đợi...",
+                parse_mode='Markdown'
+            )
+            
+            # Generate and send recommendations
+            recommendations = await self._generate_recommendations()
+            recommendations_text = self._format_recommendations(recommendations)
+            
+            # Delete loading message and send recommendations
+            await loading_msg.delete()
+            
+            keyboard = [
+                [InlineKeyboardButton("🔄 Làm mới", callback_data='refresh_recommendations')]
+            ]
+            reply_markup = InlineKeyboardMarkup(keyboard)
+            
+            await update.message.reply_text(
+                recommendations_text,
+                parse_mode='Markdown',
+                reply_markup=reply_markup
+            )
+            
+            # Log successful recommendation generation
+            self.logger.info(f"Recommendations sent successfully to user {update.effective_user.id}")
+            
+        except Exception as e:
+            self.logger.error(f"Failed to send recommendations: {str(e)}")
+            await update.message.reply_text(
+                "❌ *Lỗi:* Không thể tạo khuyến nghị\n"
+                "Vui lòng thử lại sau hoặc liên hệ hỗ trợ.",
+                parse_mode='Markdown'
+            )
     
     async def positions_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle /positions command."""
@@ -479,13 +549,59 @@ class TradingTelegramBot:
             # Here you would refresh actual data
             await self.top_command(update, context)
             
-        elif query.data == 'refresh_positions':
+        elif query.data == 'refresh_recommendations':
             await query.edit_message_text(
-                "🔄 *Đang làm mới...*\n\nVui lòng đợi...", 
+                "🔄 *Đang làm mới khuyến nghị...*\n\nVui lòng đợi...",
                 parse_mode='Markdown'
             )
-            # Here you would refresh actual data
-            await self.positions_command(update, context)
+            # Generate fresh recommendations
+            try:
+                recommendations = await self._generate_recommendations()
+                recommendations_text = self._format_recommendations(recommendations)
+                
+                keyboard = [
+                    [InlineKeyboardButton("🔄 Làm mới", callback_data='refresh_recommendations')]
+                ]
+                reply_markup = InlineKeyboardMarkup(keyboard)
+                
+                await query.edit_message_text(
+                    recommendations_text,
+                    parse_mode='Markdown',
+                    reply_markup=reply_markup
+                )
+            except Exception as e:
+                self.logger.error(f"Failed to refresh recommendations: {str(e)}")
+                await query.edit_message_text(
+                    "❌ *Lỗi:* Không thể làm mới khuyến nghị\nVui lòng thử lại sau.",
+                    parse_mode='Markdown'
+                )
+            
+        elif query.data == 'refresh_top':
+            await query.edit_message_text(
+                "🔄 *Đang làm mới...*\n\nVui lòng đợi...",
+                parse_mode='Markdown'
+            )
+            # Generate fresh top opportunities
+            try:
+                recommendations = await self._generate_recommendations()
+                top_text = self._format_top_opportunities(recommendations)
+                
+                keyboard = [
+                    [InlineKeyboardButton("🔄 Làm mới", callback_data='refresh_top')]
+                ]
+                reply_markup = InlineKeyboardMarkup(keyboard)
+                
+                await query.edit_message_text(
+                    top_text,
+                    parse_mode='Markdown',
+                    reply_markup=reply_markup
+                )
+            except Exception as e:
+                self.logger.error(f"Failed to refresh top opportunities: {str(e)}")
+                await query.edit_message_text(
+                    "❌ *Lỗi:* Không thể làm mới cơ hội giao dịch\nVui lòng thử lại sau.",
+                    parse_mode='Markdown'
+                )
             
         elif query.data.startswith('toggle_'):
             setting_type = query.data.replace('toggle_', '')
@@ -511,6 +627,10 @@ class TradingTelegramBot:
             await self.status_command(update, context)
         elif any(keyword in text for keyword in ['top', 'tốt nhất']):
             await self.top_command(update, context)
+        elif any(keyword in text for keyword in ['recommendations', 'khuyến nghị', 'gợi ý', 'mua bán', 'trading']):
+            await self.recommendations_command(update, context)
+        elif any(keyword in text for keyword in ['send recommendations', 'gửi khuyến nghị', 'tạo khuyến nghị']):
+            await self.send_recommendations_command(update, context)
         else:
             await update.message.reply_text(
                 "🤖 Xin chào! Sử dụng /help để xem các lệnh có sẵn."
@@ -537,7 +657,7 @@ class TradingTelegramBot:
     
     async def send_daily_summary(self, summary_data: Dict[str, Any]) -> bool:
         """
-        Send daily trading summary.
+        Send daily trading summary with recommendations.
         
         Args:
             summary_data: Dictionary containing daily summary information
@@ -546,6 +666,14 @@ class TradingTelegramBot:
             bool: True if sent successfully
         """
         try:
+            # Enhance summary with recommendations if not already included
+            if 'recommendations' not in summary_data:
+                try:
+                    recommendations = await self._generate_recommendations()
+                    summary_data['recommendations'] = recommendations
+                except Exception as e:
+                    self.logger.warning(f"Failed to generate recommendations for daily summary: {str(e)}")
+            
             message = self._format_daily_summary(summary_data)
             return await self.send_message(message)
         except Exception as e:
@@ -614,6 +742,20 @@ class TradingTelegramBot:
             message += f"💰 P&L hôm nay: {format_percentage(portfolio.get('daily_pnl', 0))}\n"
             message += f"📊 Tổng P&L: {format_percentage(portfolio.get('total_pnl', 0))}\n"
             message += f"🎯 Vị thế mở: {portfolio.get('open_positions', 0)}\n\n"
+        
+        # Tomorrow's recommendations
+        recommendations = summary_data.get('recommendations', {})
+        if recommendations:
+            buy_list = recommendations.get('buy_list', [])
+            sell_list = recommendations.get('sell_list', [])
+            
+            message += f"💡 *Khuyến nghị ngày mai:*\n"
+            if buy_list:
+                message += f"📈 Mua: {', '.join([rec['symbol'] for rec in buy_list[:3]])}\n"
+            if sell_list:
+                message += f"📉 Bán: {', '.join([rec['symbol'] for rec in sell_list[:3]])}\n"
+            if buy_list or sell_list:
+                message += f"💬 Dùng /recommendations để xem chi tiết\n\n"
         
         # Top performers
         top_gainers = summary_data.get('top_gainers', [])
@@ -747,6 +889,245 @@ class TradingTelegramBot:
         message += f"\n⏰ *Thời gian:* {datetime.now().strftime('%H:%M:%S')}"
         
         return message
+    
+    async def _generate_recommendations(self) -> Dict[str, Any]:
+        """
+        Generate trading recommendations for tomorrow.
+        
+        Returns:
+            dict: Recommendations data
+        """
+        try:
+            # Initialize strategy and data adapter
+            strategy = RSIPSAREngulfingStrategy()
+            data_adapter = FiinQuantAdapter()
+            
+            # Get stock symbols from config or use default list
+            symbols = self.config.get('trading', {}).get('symbols', [
+                'VIC', 'VHM', 'VRE', 'HPG', 'TCB', 'VCB', 'BID', 'CTG',
+                'MSN', 'MWG', 'FPT', 'VNM', 'SAB', 'GAS', 'PLX', 'POW'
+            ])
+            
+            recommendations = {
+                'buy_list': [],
+                'sell_list': [],
+                'watch_list': [],
+                'generated_at': datetime.now()
+            }
+            
+            # Analyze each symbol
+            for symbol in symbols[:10]:  # Limit to 10 symbols for performance
+                try:
+                    # Get historical data
+                    data = await data_adapter.get_historical_data(symbol, period='3M')
+                    if data is None or len(data) < 50:
+                        continue
+                    
+                    # Generate signal
+                    signal = strategy.generate_signal(data, symbol)
+                    
+                    if signal and signal.signal_type:
+                        recommendation = {
+                            'symbol': symbol,
+                            'signal_type': signal.signal_type,
+                            'confidence': signal.confidence,
+                            'price': signal.price,
+                            'target_price': getattr(signal, 'target_price', None),
+                            'stop_loss': getattr(signal, 'stop_loss', None),
+                            'reason': getattr(signal, 'reason', 'Phân tích kỹ thuật')
+                        }
+                        
+                        if signal.signal_type == 'BUY' and signal.confidence > 0.6:
+                            recommendations['buy_list'].append(recommendation)
+                        elif signal.signal_type == 'SELL' and signal.confidence > 0.6:
+                            recommendations['sell_list'].append(recommendation)
+                        elif signal.confidence > 0.4:
+                            recommendations['watch_list'].append(recommendation)
+                            
+                except Exception as e:
+                    self.logger.warning(f"Failed to analyze {symbol}: {str(e)}")
+                    continue
+            
+            # Sort by confidence
+            recommendations['buy_list'].sort(key=lambda x: x['confidence'], reverse=True)
+            recommendations['sell_list'].sort(key=lambda x: x['confidence'], reverse=True)
+            recommendations['watch_list'].sort(key=lambda x: x['confidence'], reverse=True)
+            
+            return recommendations
+            
+        except Exception as e:
+            self.logger.error(f"Failed to generate recommendations: {str(e)}")
+            return {
+                'buy_list': [],
+                'sell_list': [],
+                'watch_list': [],
+                'generated_at': datetime.now(),
+                'error': str(e)
+            }
+    
+    def _format_recommendations(self, recommendations: Dict[str, Any]) -> str:
+        """
+        Format recommendations for Telegram message.
+        
+        Args:
+            recommendations: Recommendations data
+            
+        Returns:
+            str: Formatted message
+        """
+        message = "💡 *KHUYẾN NGHỊ MUA/BÁN NGÀY MAI*\n\n"
+        
+        # Buy recommendations
+        buy_list = recommendations.get('buy_list', [])
+        message += "📈 *Khuyến nghị MUA:*\n"
+        if buy_list:
+            for i, rec in enumerate(buy_list[:5], 1):
+                confidence_stars = "⭐" * min(int(rec['confidence'] * 5), 5)
+                message += f"{i}. *{rec['symbol']}* - {format_currency(rec['price'])} {confidence_stars}\n"
+                if rec.get('target_price'):
+                    message += f"   🎯 Mục tiêu: {format_currency(rec['target_price'])}\n"
+                if rec.get('stop_loss'):
+                    message += f"   🛑 Cắt lỗ: {format_currency(rec['stop_loss'])}\n"
+            message += "\n"
+        else:
+            message += "Hiện tại chưa có khuyến nghị mua\n\n"
+        
+        # Sell recommendations
+        sell_list = recommendations.get('sell_list', [])
+        message += "📉 *Khuyến nghị BÁN:*\n"
+        if sell_list:
+            for i, rec in enumerate(sell_list[:5], 1):
+                confidence_stars = "⭐" * min(int(rec['confidence'] * 5), 5)
+                message += f"{i}. *{rec['symbol']}* - {format_currency(rec['price'])} {confidence_stars}\n"
+                if rec.get('target_price'):
+                    message += f"   🎯 Mục tiêu: {format_currency(rec['target_price'])}\n"
+            message += "\n"
+        else:
+            message += "Hiện tại chưa có khuyến nghị bán\n\n"
+        
+        # Watch list
+        watch_list = recommendations.get('watch_list', [])
+        message += "👀 *Danh sách theo dõi:*\n"
+        if watch_list:
+            for i, rec in enumerate(watch_list[:3], 1):
+                message += f"{i}. *{rec['symbol']}* - {format_currency(rec['price'])}\n"
+            message += "\n"
+        else:
+            message += "Hiện tại chưa có mã cần theo dõi\n\n"
+        
+        # Strategy info
+        message += "🎯 *Chiến lược:*\n"
+        message += "• Dựa trên phân tích RSI-PSAR-Engulfing\n"
+        message += "• Xem xét thanh khoản và volume\n"
+        message += "• Đánh giá rủi ro/lợi nhuận\n\n"
+        
+        # Disclaimer
+        message += "⚠️ *Lưu ý:* Đây chỉ là khuyến nghị tham khảo, không phải lời khuyên đầu tư.\n\n"
+        
+        # Timestamp
+        generated_at = recommendations.get('generated_at', datetime.now())
+        message += f"🕐 *Cập nhật:* {generated_at.strftime('%H:%M:%S')}"
+        
+        return message
+    
+    def _format_top_opportunities(self, recommendations: Dict[str, Any]) -> str:
+        """
+        Format top trading opportunities for /top command.
+        
+        Args:
+            recommendations: Recommendations data
+            
+        Returns:
+            str: Formatted message
+        """
+        message = "🔝 *TOP CƠ HỘI GIAO DỊCH HIỆN TẠI*\n\n"
+        
+        # Top buy opportunities
+        buy_list = recommendations.get('buy_list', [])
+        message += "📈 *Top mua (P_buy cao):*\n"
+        if buy_list:
+            for i, rec in enumerate(buy_list[:3], 1):
+                confidence_percent = int(rec['confidence'] * 100)
+                message += f"{i}. *{rec['symbol']}* - {format_currency(rec['price'])} ({confidence_percent}%)\n"
+        else:
+            message += "Hiện tại chưa có tín hiệu mua\n"
+        message += "\n"
+        
+        # Top sell opportunities
+        sell_list = recommendations.get('sell_list', [])
+        message += "📉 *Top bán (P_sell cao):*\n"
+        if sell_list:
+            for i, rec in enumerate(sell_list[:3], 1):
+                confidence_percent = int(rec['confidence'] * 100)
+                message += f"{i}. *{rec['symbol']}* - {format_currency(rec['price'])} ({confidence_percent}%)\n"
+        else:
+            message += "Hiện tại chưa có tín hiệu bán\n"
+        message += "\n"
+        
+        # Watch list (risk alerts)
+        watch_list = recommendations.get('watch_list', [])
+        message += "⚠️ *Cần theo dõi:*\n"
+        if watch_list:
+            for i, rec in enumerate(watch_list[:3], 1):
+                confidence_percent = int(rec['confidence'] * 100)
+                message += f"{i}. *{rec['symbol']}* - {format_currency(rec['price'])} ({confidence_percent}%)\n"
+        else:
+            message += "Hiện tại chưa có cảnh báo\n"
+        message += "\n"
+        
+        # Tips
+        message += "💡 *Gợi ý:* Sử dụng /recommendations để xem khuyến nghị chi tiết cho ngày mai\n\n"
+        
+        # Timestamp
+        generated_at = recommendations.get('generated_at', datetime.now())
+        message += f"🕐 *Cập nhật:* {generated_at.strftime('%H:%M:%S')}"
+        
+        return message
+    
+    async def send_recommendations_alert(self) -> bool:
+        """
+        Send daily recommendations alert automatically.
+        
+        Returns:
+            bool: True if sent successfully
+        """
+        try:
+            recommendations = await self._generate_recommendations()
+            
+            # Create alert message
+            message = "🔔 *KHUYẾN NGHỊ GIAO DỊCH HÀNG NGÀY*\n\n"
+            
+            buy_list = recommendations.get('buy_list', [])
+            sell_list = recommendations.get('sell_list', [])
+            
+            if buy_list or sell_list:
+                if buy_list:
+                    message += f"📈 *Khuyến nghị MUA ({len(buy_list)} mã):*\n"
+                    for rec in buy_list[:3]:
+                        confidence_stars = "⭐" * min(int(rec['confidence'] * 5), 5)
+                        message += f"• *{rec['symbol']}* - {format_currency(rec['price'])} {confidence_stars}\n"
+                    message += "\n"
+                
+                if sell_list:
+                    message += f"📉 *Khuyến nghị BÁN ({len(sell_list)} mã):*\n"
+                    for rec in sell_list[:3]:
+                        confidence_stars = "⭐" * min(int(rec['confidence'] * 5), 5)
+                        message += f"• *{rec['symbol']}* - {format_currency(rec['price'])} {confidence_stars}\n"
+                    message += "\n"
+                
+                message += "💬 Dùng /recommendations để xem chi tiết\n\n"
+            else:
+                message += "📊 Hiện tại chưa có khuyến nghị mạnh\n"
+                message += "📈 Thị trường đang trong giai đoạn quan sát\n\n"
+            
+            message += "⚠️ *Lưu ý:* Đây chỉ là khuyến nghị tham khảo\n"
+            message += f"🕐 *Thời gian:* {datetime.now().strftime('%H:%M:%S - %d/%m/%Y')}"
+            
+            return await self.send_message(message)
+            
+        except Exception as e:
+            self.logger.error(f"Failed to send recommendations alert: {str(e)}")
+            return False
     
     def get_bot_status(self) -> Dict[str, Any]:
         """Get current bot status."""

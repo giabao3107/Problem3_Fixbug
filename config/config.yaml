@@ -54,17 +54,34 @@ alerts:
     debounce_minutes: 5  # Minimum time between same alerts
     max_alerts_per_hour: 20
     
+  # Email Configuration
   email:
     enabled: true
-    smtp_server: "smtp.gmail.com"
-    smtp_port: 587
-    sender_email: ""  # Set in .env file
-    sender_password: ""  # Set in .env file
-    recipient_emails: []  # Set in .env file
-    debounce_minutes: 15  # Minimum time between same email alerts
-    max_emails_per_hour: 10
-    send_daily_summary: true
-    daily_summary_time: "17:00"  # Send daily summary at 5 PM
+    
+    # SMTP Settings (override with environment variables)
+    smtp:
+      server: "smtp.gmail.com"  # Override with SMTP_SERVER env var
+      port: 587                 # Override with SMTP_PORT env var
+      use_tls: true            # Override with EMAIL_USE_TLS env var
+    
+    # Email Credentials (MUST be set via environment variables)
+    credentials:
+      sender_email: ""         # Set via SENDER_EMAIL env var
+      sender_password: ""      # Set via SENDER_PASSWORD env var
+      recipient_emails: []     # Set via RECIPIENT_EMAILS env var (comma-separated)
+    
+    # Rate limiting
+    settings:
+      debounce_minutes: 15  # Minimum time between same email alerts
+      max_emails_per_hour: 10
+      send_daily_summary: true
+      daily_summary_time: "17:00"  # Send daily summary at 5 PM
+      
+    # Email Templates
+    templates:
+      subject_prefix: "[Trading Alert]"
+      include_charts: false
+      include_recommendations: true
     
   # Alert Types
   types:

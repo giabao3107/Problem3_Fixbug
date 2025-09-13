@@ -58,23 +58,30 @@ class EmailService:
     
     def _load_email_config(self) -> Dict[str, Any]:
         """Load email configuration from config and environment variables."""
-        # Get base config from YAML
-        email_config = self.config.get('alerts', {}).get('email', {})
+        email_config = self.config.get('email', {})
+        smtp_config = email_config.get('smtp', {})
+        credentials_config = email_config.get('credentials', {})
         
-        # Override with environment variables
-        email_config.update({
-            'sender_email': os.getenv('EMAIL_SENDER', email_config.get('sender_email', '')),
-            'sender_password': os.getenv('EMAIL_PASSWORD', email_config.get('sender_password', '')),
-            'smtp_server': os.getenv('EMAIL_SMTP_SERVER', email_config.get('smtp_server', 'smtp.gmail.com')),
-            'smtp_port': int(os.getenv('EMAIL_SMTP_PORT', email_config.get('smtp_port', 587))),
-        })
+        # Get configuration with environment variable overrides
+        config = {
+            'smtp_server': os.getenv('SMTP_SERVER', smtp_config.get('server', 'smtp.gmail.com')),
+            'smtp_port': int(os.getenv('SMTP_PORT', smtp_config.get('port', 587))),
+            'sender_email': os.getenv('SENDER_EMAIL', credentials_config.get('sender_email', '')),
+            'sender_password': os.getenv('SENDER_PASSWORD', credentials_config.get('sender_password', '')),
+            'recipient_emails': self._parse_recipient_emails(
+                os.getenv('RECIPIENT_EMAILS', ''),
+                credentials_config.get('recipient_emails', [])
+            ),
+            'use_tls': os.getenv('EMAIL_USE_TLS', str(smtp_config.get('use_tls', True))).lower() == 'true'
+        }
         
-        # Parse recipient emails from environment
-        recipients_env = os.getenv('EMAIL_RECIPIENTS', '')
-        if recipients_env:
-            email_config['recipient_emails'] = [email.strip() for email in recipients_env.split(',') if email.strip()]
-        
-        return email_config
+        return config
+    
+    def _parse_recipient_emails(self, env_emails: str, config_emails: List[str]) -> List[str]:
+        """Parse recipient emails from environment variable or config."""
+        if env_emails:
+            return [email.strip() for email in env_emails.split(',') if email.strip()]
+        return config_emails
     
     def _should_send_email(self, alert_type: str) -> bool:
         """Check if email should be sent based on rate limiting and configuration."""
@@ -177,7 +184,7 @@ class EmailService:
     
     def send_daily_summary(self, summary_data: Dict[str, Any], force: bool = False) -> bool:
         """
-        Send daily summary email.
+        Send daily summary email with tomorrow's recommendations.
         
         Args:
             summary_data: Daily summary data
@@ -190,6 +197,9 @@ class EmailService:
             return False
         
         try:
+            # Add tomorrow's recommendations to summary data
+            summary_data = self._enhance_summary_with_recommendations(summary_data)
+            
             success = self.notifier.send_daily_summary(summary_data)
             if success:
                 self._daily_summary_sent = True
@@ -325,6 +335,24 @@ class EmailService:
                 'config_valid': False
             }
         
+        # Test SMTP connection first
+        try:
+            import smtplib
+            import ssl
+            
+            context = ssl.create_default_context()
+            with smtplib.SMTP(self.email_config['smtp_server'], self.email_config['smtp_port']) as server:
+                if self.email_config.get('use_tls', True):
+                    server.starttls(context=context)
+                server.login(self.email_config['sender_email'], self.email_config['sender_password'])
+            
+        except Exception as e:
+            return {
+                'success': False,
+                'message': f'SMTP connection failed: {str(e)}',
+                'config_valid': True
+            }
+        
         # Try to send a test email
         try:
             test_data = {
@@ -356,6 +384,133 @@ class EmailService:
                 'message': f'Test email failed: {str(e)}',
                 'config_valid': True
             }
+    
+    def send_test_email(self) -> bool:
+        """
+        Send a test email to verify configuration.
+        
+        Returns:
+            bool: True if test email sent successfully
+        """
+        if not self.enabled:
+            return False
+            
+        try:
+            test_subject = "Trading Alert System - Test Email"
+            test_content = """
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: #2E8B57;">🎯 Trading Alert System</h2>
+                <p>This is a test email from your Trading Alert System.</p>
+                <p><strong>✅ Email configuration is working correctly!</strong></p>
+                <hr style="border: 1px solid #ddd; margin: 20px 0;">
+                <p style="color: #666; font-size: 12px;">
+                    If you received this email, your email notifications are properly configured.
+                    You will now receive trading alerts and daily summaries.
+                </p>
+            </div>
+            """
+            
+            return self.notifier._send_email(test_subject, test_content)
+        except Exception as e:
+            self.logger.error(f"Failed to send test email: {str(e)}")
+            return False
+    
+    def _enhance_summary_with_recommendations(self, summary_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Enhance summary data with tomorrow's trading recommendations.
+        
+        Args:
+            summary_data: Original summary data
+            
+        Returns:
+            Enhanced summary data with recommendations
+        """
+        try:
+            from strategy.rsi_psar_engulfing import RSIPSAREngulfingStrategy
+            from utils.fiinquant_adapter import FiinQuantAdapter
+            import pandas as pd
+            
+            # Initialize strategy and adapter
+            strategy = RSIPSAREngulfingStrategy()
+            adapter = FiinQuantAdapter()
+            
+            # Get list of stocks to analyze (from config or default list)
+            symbols = self.config.get('symbols', ['VIC', 'VHM', 'VRE', 'HPG', 'TCB', 'CTG', 'BID', 'VCB', 'MSN', 'MWG'])
+            
+            buy_recommendations = []
+            sell_recommendations = []
+            watch_list = []
+            
+            for symbol in symbols[:10]:  # Limit to top 10 for email
+                try:
+                    # Get recent data for analysis
+                    df = adapter.get_historical_data(symbol, periods=100)
+                    if df is None or len(df) < 50:
+                        continue
+                    
+                    # Generate signal
+                    signal = strategy.generate_signal(df, symbol)
+                    if signal is None:
+                        continue
+                    
+                    current_price = df['close'].iloc[-1]
+                    
+                    # Create recommendation based on signal
+                    if signal.signal_type == 'BUY' and signal.confidence >= 0.6:
+                        target_price = current_price * (1 + signal.confidence * 0.1)  # Estimate target
+                        buy_recommendations.append({
+                            'symbol': symbol,
+                            'current_price': current_price,
+                            'target_price': target_price,
+                            'confidence': signal.confidence,
+                            'reason': f"RSI: {signal.indicators.get('rsi', 0):.1f}, PSAR: {signal.indicators.get('psar_trend', 'N/A')}"
+                        })
+                    elif signal.signal_type == 'SELL' and signal.confidence >= 0.6:
+                        target_price = current_price * (1 - signal.confidence * 0.1)  # Estimate target
+                        sell_recommendations.append({
+                            'symbol': symbol,
+                            'current_price': current_price,
+                            'target_price': target_price,
+                            'confidence': signal.confidence,
+                            'reason': f"RSI: {signal.indicators.get('rsi', 0):.1f}, PSAR: {signal.indicators.get('psar_trend', 'N/A')}"
+                        })
+                    elif signal.confidence >= 0.4:  # Add to watch list if moderate confidence
+                        support = current_price * 0.95
+                        resistance = current_price * 1.05
+                        watch_list.append({
+                            'symbol': symbol,
+                            'current_price': current_price,
+                            'key_levels': f"S: {support:,.0f} - R: {resistance:,.0f}",
+                            'reason': f"Moderate signal strength, monitor for breakout"
+                        })
+                        
+                except Exception as e:
+                    self.logger.warning(f"Failed to analyze {symbol}: {str(e)}")
+                    continue
+            
+            # Sort by confidence
+            buy_recommendations.sort(key=lambda x: x['confidence'], reverse=True)
+            sell_recommendations.sort(key=lambda x: x['confidence'], reverse=True)
+            
+            # Add recommendations to summary data
+            summary_data['tomorrow_recommendations'] = {
+                'buy_list': buy_recommendations[:5],  # Top 5 buy recommendations
+                'sell_list': sell_recommendations[:5],  # Top 5 sell recommendations
+                'watch_list': watch_list[:5]  # Top 5 watch list
+            }
+            
+            self.logger.info(f"Generated {len(buy_recommendations)} buy, {len(sell_recommendations)} sell, {len(watch_list)} watch recommendations")
+            
+        except Exception as e:
+            self.logger.error(f"Failed to generate tomorrow's recommendations: {str(e)}")
+            # Add empty recommendations if generation fails
+            summary_data['tomorrow_recommendations'] = {
+                'buy_list': [],
+                'sell_list': [],
+                'watch_list': []
+            }
+        
+        return summary_data
 
 
 # Global email service instance

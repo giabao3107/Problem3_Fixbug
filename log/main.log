@@ -1,413 +1,51 @@
-2025-09-13 00:51:22,018 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 00:51:22,018 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 00:51:22,019 - realtime_alert - INFO - Monitoring 33 symbols
-2025-09-13 00:51:22,019 - realtime_alert - INFO - All components initialized successfully
-2025-09-13 00:51:22,020 - realtime_alert - INFO - Starting Real-time Monitor
-2025-09-13 00:51:22,021 - database.data_manager - ERROR - Failed to initialize database: near "INDEX": syntax error
-2025-09-13 00:51:22,022 - realtime_alert - ERROR - Failed to start monitor: near "INDEX": syntax error
-2025-09-13 00:51:22,022 - realtime_alert - INFO - Shutting down Real-time Monitor
-2025-09-13 00:51:23,223 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
-2025-09-13 00:51:23,224 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
-2025-09-13 00:51:23,224 - database.data_manager - INFO - Database connection closed
-2025-09-13 00:51:23,224 - realtime_alert - INFO - Shutdown completed
-2025-09-13 12:34:34,146 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 12:34:34,146 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 12:34:34,146 - realtime_alert - INFO - Monitoring 33 symbols
-2025-09-13 12:34:34,146 - realtime_alert - INFO - All components initialized successfully
-2025-09-13 12:34:34,160 - realtime_alert - INFO - Starting Real-time Monitor
-2025-09-13 12:34:34,165 - database.data_manager - ERROR - Failed to initialize database: near "INDEX": syntax error
-2025-09-13 12:34:34,165 - realtime_alert - ERROR - Failed to start monitor: near "INDEX": syntax error
-2025-09-13 12:34:34,165 - realtime_alert - INFO - Shutting down Real-time Monitor
-2025-09-13 12:34:35,893 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
-2025-09-13 12:34:35,893 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
-2025-09-13 12:34:35,898 - database.data_manager - INFO - Database connection closed
-2025-09-13 12:34:35,898 - realtime_alert - INFO - Shutdown completed
-2025-09-13 12:39:03,371 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 12:39:03,371 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 12:39:03,371 - realtime_alert - INFO - Monitoring 33 symbols
-2025-09-13 12:39:03,371 - realtime_alert - INFO - All components initialized successfully
-2025-09-13 12:39:03,376 - realtime_alert - INFO - Starting Real-time Monitor
-2025-09-13 12:39:03,377 - database.data_manager - ERROR - Failed to initialize database: near "INDEX": syntax error
-2025-09-13 12:39:03,377 - realtime_alert - ERROR - Failed to start monitor: near "INDEX": syntax error
-2025-09-13 12:39:03,377 - realtime_alert - INFO - Shutting down Real-time Monitor
-2025-09-13 12:39:05,204 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
-2025-09-13 12:39:05,204 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
-2025-09-13 12:39:05,207 - database.data_manager - INFO - Database connection closed
-2025-09-13 12:39:05,207 - realtime_alert - INFO - Shutdown completed
-2025-09-13 12:50:07,391 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 12:50:07,391 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 14:33:12,348 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 14:33:12,348 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 14:33:17,158 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
-2025-09-13 14:33:17,161 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
-2025-09-13 14:33:17,161 - realtime_alert - INFO - All components initialized successfully
-2025-09-13 14:33:17,162 - realtime_alert - INFO - Starting Real-time Monitor
-2025-09-13 14:33:17,167 - database.data_manager - ERROR - Failed to initialize database: near "CREATE": syntax error
-2025-09-13 14:33:17,168 - realtime_alert - ERROR - Failed to start monitor: near "CREATE": syntax error
-2025-09-13 14:33:17,168 - realtime_alert - INFO - Shutting down Real-time Monitor
-2025-09-13 14:33:18,692 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
-2025-09-13 14:33:18,692 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
-2025-09-13 14:33:18,695 - database.data_manager - INFO - Database connection closed
-2025-09-13 14:33:18,697 - realtime_alert - INFO - Shutdown completed
-2025-09-13 20:00:24,703 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 20:00:24,704 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 20:00:30,565 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
-2025-09-13 20:00:30,566 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
-2025-09-13 20:00:30,566 - realtime_alert - INFO - All components initialized successfully
-2025-09-13 20:00:30,567 - realtime_alert - INFO - Starting Real-time Monitor
-2025-09-13 20:00:30,573 - database.data_manager - ERROR - Failed to initialize database: near "CREATE": syntax error
-2025-09-13 20:00:30,573 - realtime_alert - ERROR - Failed to start monitor: near "CREATE": syntax error
-2025-09-13 20:00:30,573 - realtime_alert - INFO - Shutting down Real-time Monitor
-2025-09-13 20:00:31,935 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
-2025-09-13 20:00:31,936 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
-2025-09-13 20:00:31,936 - database.data_manager - INFO - Database connection closed
-2025-09-13 20:00:31,936 - realtime_alert - INFO - Shutdown completed
-2025-09-13 20:18:44,128 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 20:18:44,129 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 20:18:46,414 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
-2025-09-13 20:18:46,416 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
-2025-09-13 20:18:46,416 - realtime_alert - INFO - All components initialized successfully
-2025-09-13 20:18:46,417 - realtime_alert - INFO - Starting Real-time Monitor
-2025-09-13 20:18:46,418 - database.data_manager - ERROR - Failed to initialize database: near "CREATE": syntax error
-2025-09-13 20:18:46,419 - realtime_alert - ERROR - Failed to start monitor: near "CREATE": syntax error
-2025-09-13 20:18:46,419 - realtime_alert - INFO - Shutting down Real-time Monitor
-2025-09-13 20:18:47,525 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot1234567890:ABCDEFghijklmnopqrstuvwxyzABCDEFG1234/sendMessage "HTTP/1.1 401 Unauthorized"
-2025-09-13 20:18:47,526 - jobs.telegram_bot - ERROR - Failed to send Telegram message: Unauthorized
-2025-09-13 20:18:47,526 - database.data_manager - INFO - Database connection closed
-2025-09-13 20:18:47,527 - realtime_alert - INFO - Shutdown completed
-2025-09-13 20:20:51,338 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 20:20:51,339 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 20:20:53,122 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
-2025-09-13 20:20:53,123 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
-2025-09-13 20:20:53,123 - realtime_alert - INFO - All components initialized successfully
-2025-09-13 20:20:53,124 - realtime_alert - INFO - Starting Real-time Monitor
-2025-09-13 20:20:53,184 - database.data_manager - INFO - Database tables created/verified
-2025-09-13 20:20:53,184 - database.data_manager - INFO - Database initialized: database/trading_data.db
-2025-09-13 20:20:53,184 - utils.fiinquant_adapter - INFO - Attempting to login to FiinQuant (attempt 1)
-2025-09-13 20:20:53,373 - utils.fiinquant_adapter - INFO - Successfully logged in to FiinQuant
-2025-09-13 20:20:54,299 - jobs.telegram_bot - INFO - Telegram bot initialized
-2025-09-13 20:20:54,948 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getMe "HTTP/1.1 200 OK"
-2025-09-13 20:20:54,948 - telegram.ext.Application - INFO - Application started
-2025-09-13 20:20:55,157 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/deleteWebhook "HTTP/1.1 200 OK"
-2025-09-13 20:20:55,157 - jobs.telegram_bot - INFO - Telegram bot started
-2025-09-13 20:20:57,005 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
-2025-09-13 20:20:58,521 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
-2025-09-13 20:20:58,521 - realtime_alert - INFO - Scheduled tasks configured
-2025-09-13 20:20:58,521 - realtime_alert - INFO - Starting main monitoring loop
-2025-09-13 20:21:06,653 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:21:16,865 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:21:27,073 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:21:37,281 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:21:47,485 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:21:57,698 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:22:07,898 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:22:18,113 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:22:28,323 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:22:38,530 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:22:48,739 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:22:58,948 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:23:09,156 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:23:19,363 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:23:29,572 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:23:39,781 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:23:49,989 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:24:00,216 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:24:10,431 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:24:20,631 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:24:30,848 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:24:41,067 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:24:51,274 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:26:36,393 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 20:26:36,393 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 20:26:38,631 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
-2025-09-13 20:26:38,632 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
-2025-09-13 20:26:38,632 - realtime_alert - INFO - All components initialized successfully
-2025-09-13 20:26:38,634 - realtime_alert - INFO - Starting Real-time Monitor
-2025-09-13 20:26:38,641 - database.data_manager - INFO - Database tables created/verified
-2025-09-13 20:26:38,641 - database.data_manager - INFO - Database initialized: database/trading_data.db
-2025-09-13 20:26:38,641 - utils.fiinquant_adapter - INFO - Attempting to login to FiinQuant (attempt 1)
-2025-09-13 20:26:38,788 - utils.fiinquant_adapter - INFO - Successfully logged in to FiinQuant
-2025-09-13 20:26:39,813 - jobs.telegram_bot - INFO - Telegram bot initialized
-2025-09-13 20:26:40,415 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getMe "HTTP/1.1 200 OK"
-2025-09-13 20:26:40,415 - telegram.ext.Application - INFO - Application started
-2025-09-13 20:26:40,620 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/deleteWebhook "HTTP/1.1 200 OK"
-2025-09-13 20:26:40,620 - jobs.telegram_bot - INFO - Telegram bot started
-2025-09-13 20:26:42,415 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
-2025-09-13 20:26:43,909 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
-2025-09-13 20:26:43,911 - realtime_alert - INFO - Scheduled tasks configured
-2025-09-13 20:26:43,911 - realtime_alert - INFO - Starting main monitoring loop
-2025-09-13 20:26:52,237 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:27:02,436 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:27:20,856 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 20:27:20,856 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 20:27:22,584 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
-2025-09-13 20:27:22,585 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
-2025-09-13 20:27:22,585 - realtime_alert - INFO - All components initialized successfully
-2025-09-13 20:27:22,586 - realtime_alert - INFO - Starting Real-time Monitor
-2025-09-13 20:27:22,588 - database.data_manager - INFO - Database tables created/verified
-2025-09-13 20:27:22,588 - database.data_manager - INFO - Database initialized: database/trading_data.db
-2025-09-13 20:27:22,589 - utils.fiinquant_adapter - INFO - Attempting to login to FiinQuant (attempt 1)
-2025-09-13 20:27:22,797 - utils.fiinquant_adapter - INFO - Successfully logged in to FiinQuant
-2025-09-13 20:27:23,421 - jobs.telegram_bot - INFO - Telegram bot initialized
-2025-09-13 20:27:23,992 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getMe "HTTP/1.1 200 OK"
-2025-09-13 20:27:23,993 - telegram.ext.Application - INFO - Application started
-2025-09-13 20:27:24,180 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/deleteWebhook "HTTP/1.1 200 OK"
-2025-09-13 20:27:24,180 - jobs.telegram_bot - INFO - Telegram bot started
-2025-09-13 20:27:25,191 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:27:25,410 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
-2025-09-13 20:27:25,932 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
-2025-09-13 20:27:26,700 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
-2025-09-13 20:27:26,701 - realtime_alert - INFO - Scheduled tasks configured
-2025-09-13 20:27:26,702 - realtime_alert - INFO - Starting main monitoring loop
-2025-09-13 20:27:35,381 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:27:45,565 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:27:55,751 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:28:05,938 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:28:16,128 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:28:26,316 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:28:36,502 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:28:46,688 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:28:56,874 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:29:07,052 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:29:17,250 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:29:27,434 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:29:37,622 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:29:47,834 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:29:58,029 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:30:08,222 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:30:18,415 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:30:28,606 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:30:38,796 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:30:48,985 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:30:59,173 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:31:09,401 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:31:19,598 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:31:29,778 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:31:39,972 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:31:50,158 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:32:00,354 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:32:10,539 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:32:20,725 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:32:30,912 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:32:41,095 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:32:51,294 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:33:01,534 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:33:11,734 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:33:21,923 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:33:32,116 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:33:42,311 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:33:52,503 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:34:02,688 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:34:12,878 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:34:23,072 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:34:33,261 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:34:43,446 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:47:16,893 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 20:47:16,893 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 20:47:18,844 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
-2025-09-13 20:47:18,844 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
-2025-09-13 20:47:18,844 - realtime_alert - INFO - All components initialized successfully
-2025-09-13 20:47:18,845 - realtime_alert - INFO - Starting Real-time Monitor
-2025-09-13 20:47:18,848 - database.data_manager - INFO - Database tables created/verified
-2025-09-13 20:47:18,848 - database.data_manager - INFO - Database initialized: database/trading_data.db
-2025-09-13 20:47:18,848 - utils.fiinquant_adapter - INFO - Attempting to login to FiinQuant (attempt 1)
-2025-09-13 20:47:19,089 - utils.fiinquant_adapter - INFO - Successfully logged in to FiinQuant
-2025-09-13 20:47:19,656 - jobs.telegram_bot - INFO - Telegram bot initialized
-2025-09-13 20:47:20,295 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getMe "HTTP/1.1 200 OK"
-2025-09-13 20:47:20,296 - telegram.ext.Application - INFO - Application started
-2025-09-13 20:47:20,499 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/deleteWebhook "HTTP/1.1 200 OK"
-2025-09-13 20:47:20,500 - jobs.telegram_bot - INFO - Telegram bot started
-2025-09-13 20:47:21,665 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
-2025-09-13 20:47:22,831 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
-2025-09-13 20:47:22,832 - realtime_alert - INFO - Scheduled tasks configured
-2025-09-13 20:47:22,832 - realtime_alert - INFO - Starting main monitoring loop
-2025-09-13 20:47:31,477 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:47:41,662 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:47:51,846 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:48:02,032 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:48:12,206 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:48:22,405 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:48:32,589 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:48:42,774 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:48:52,959 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:49:03,151 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:49:13,332 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:49:23,525 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:49:33,707 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:49:43,897 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:49:54,077 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:50:04,268 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:50:14,453 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:50:24,638 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:50:34,821 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:50:45,005 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:50:55,196 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:51:05,367 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:51:15,566 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:51:25,743 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:51:35,927 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:51:46,120 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:51:56,304 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:52:06,494 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:52:16,688 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:52:26,859 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:52:37,057 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:52:47,250 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:52:53,156 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 409 Conflict"
-2025-09-13 20:52:53,156 - telegram.ext.Updater - ERROR - Exception happened while polling for updates.
-Traceback (most recent call last):
-  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 115, in network_retry_loop
-    if not await do_action():
-           ^^^^^^^^^^^^^^^^^
-  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 108, in do_action
-    return action_cb_task.result()
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
-    updates = await self.bot.get_updates(
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 670, in get_updates
-    updates = await super().get_updates(
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 4611, in get_updates
-    await self._post(
-  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 698, in _post
-    return await self._do_post(
-           ^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\ext\_extbot.py", line 370, in _do_post
-    return await super()._do_post(
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\_bot.py", line 727, in _do_post
-    result = await request.post(
-             ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 197, in post
-    result = await self._request_wrapper(
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python312\Lib\site-packages\telegram\request\_baserequest.py", line 374, in _request_wrapper
-    raise exception
-telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
-2025-09-13 20:53:04,387 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:53:14,574 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:53:24,761 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:53:34,947 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:53:45,130 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:53:55,316 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:54:05,501 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:54:15,686 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:54:25,873 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:54:36,047 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:54:46,240 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:54:56,424 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:55:06,616 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:55:16,801 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:55:26,985 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:55:37,172 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:55:47,359 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:55:57,544 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:56:07,730 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:56:17,911 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:56:28,095 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:56:38,289 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:56:48,474 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:56:58,658 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:57:08,846 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:57:19,023 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:57:29,220 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:57:39,408 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:57:49,587 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:57:59,780 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:58:09,975 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:58:20,161 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:58:30,345 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:58:40,527 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:58:50,708 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:59:00,892 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:59:11,092 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:59:21,279 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:59:31,463 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:59:41,648 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 20:59:51,825 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:00:02,021 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:00:12,202 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:00:22,398 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:00:32,585 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:00:42,765 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:00:52,947 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:01:03,146 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:01:13,333 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:01:23,520 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:01:33,702 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:01:43,892 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:01:54,073 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:02:04,254 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:02:14,451 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:02:24,638 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:02:34,828 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:02:45,015 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:02:55,196 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:03:05,381 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:03:15,561 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:03:25,760 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:03:35,945 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:03:46,131 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:03:56,310 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:04:06,503 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:04:16,686 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:04:27,288 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:04:37,468 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:04:47,662 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:04:57,849 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:05:08,032 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:05:18,222 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:05:28,413 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:05:38,591 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:05:48,788 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:05:58,973 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:06:09,151 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:06:19,340 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:06:29,539 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:06:39,726 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:06:49,911 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:07:00,102 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:07:10,287 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:07:20,472 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:07:30,658 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:07:40,856 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:07:51,054 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:08:01,246 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 21:08:11,439 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:17:29,785 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 22:17:29,785 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 22:17:29,786 - realtime_alert - ERROR - Failed to initialize components: 'FiinQuantAdapter' object has no attribute 'logger'
-2025-09-13 22:17:29,786 - root - ERROR - Monitor failed: 'FiinQuantAdapter' object has no attribute 'logger'
-2025-09-13 22:25:11,143 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
-2025-09-13 22:25:11,143 - realtime_alert - INFO - Initializing FiinQuant data adapter
-2025-09-13 22:25:11,144 - utils.fiinquant_adapter - INFO - Advanced caching enabled
-2025-09-13 22:25:14,186 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
-2025-09-13 22:25:14,187 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
-2025-09-13 22:25:14,187 - realtime_alert - INFO - All components initialized successfully
-2025-09-13 22:25:14,188 - realtime_alert - INFO - Starting Real-time Monitor
-2025-09-13 22:25:14,194 - database.data_manager - INFO - Database tables created/verified
-2025-09-13 22:25:14,194 - database.data_manager - INFO - Database initialized: database/trading_data.db
-2025-09-13 22:25:14,195 - utils.fiinquant_adapter - INFO - Attempting to login to FiinQuant (attempt 1)
-2025-09-13 22:25:14,425 - utils.fiinquant_adapter - INFO - Successfully logged in to FiinQuant
-2025-09-13 22:25:15,466 - jobs.telegram_bot - INFO - Telegram bot initialized
-2025-09-13 22:25:16,069 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getMe "HTTP/1.1 200 OK"
-2025-09-13 22:25:16,070 - telegram.ext.Application - INFO - Application started
-2025-09-13 22:25:16,266 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/deleteWebhook "HTTP/1.1 200 OK"
-2025-09-13 22:25:16,267 - jobs.telegram_bot - INFO - Telegram bot started
-2025-09-13 22:25:17,689 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
-2025-09-13 22:25:19,407 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
-2025-09-13 22:25:19,410 - realtime_alert - INFO - Scheduled tasks configured
-2025-09-13 22:25:19,410 - realtime_alert - INFO - Starting main monitoring loop
-2025-09-13 22:25:27,490 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:25:37,690 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:25:47,892 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:25:58,098 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:26:08,300 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:26:18,504 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:26:28,705 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:26:38,907 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:26:49,109 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:26:59,312 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:27:09,513 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
-2025-09-13 22:27:19,718 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:42:14,512 - realtime_alert - INFO - Initializing Real-time Monitor with FiinQuant data
+2025-09-13 23:42:14,512 - realtime_alert - INFO - Initializing FiinQuant data adapter
+2025-09-13 23:42:14,513 - utils.fiinquant_adapter - INFO - Advanced caching enabled
+2025-09-13 23:42:16,357 - root - INFO - Loaded all symbols: HOSE=0, HNX=314, UPCOM=886
+2025-09-13 23:42:16,357 - realtime_alert - INFO - Monitoring ALL symbols from HOSE, HNX, UPCOM: 1200 symbols
+2025-09-13 23:42:16,358 - realtime_alert - INFO - All components initialized successfully
+2025-09-13 23:42:16,358 - realtime_alert - INFO - Starting Real-time Monitor
+2025-09-13 23:42:16,361 - database.data_manager - INFO - Database tables created/verified
+2025-09-13 23:42:16,372 - database.data_manager - INFO - Database initialized: database/trading_data.db
+2025-09-13 23:42:16,372 - utils.fiinquant_adapter - INFO - Attempting to login to FiinQuant (attempt 1)
+2025-09-13 23:42:16,545 - utils.fiinquant_adapter - INFO - Successfully logged in to FiinQuant
+2025-09-13 23:42:17,228 - jobs.telegram_bot - INFO - Telegram bot initialized
+2025-09-13 23:42:17,810 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getMe "HTTP/1.1 200 OK"
+2025-09-13 23:42:17,810 - telegram.ext.Application - INFO - Application started
+2025-09-13 23:42:18,011 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/deleteWebhook "HTTP/1.1 200 OK"
+2025-09-13 23:42:18,011 - jobs.telegram_bot - INFO - Telegram bot started
+2025-09-13 23:42:19,514 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 23:42:20,842 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 23:42:20,842 - realtime_alert - INFO - Scheduled tasks configured
+2025-09-13 23:42:20,842 - realtime_alert - INFO - Starting main monitoring loop
+2025-09-13 23:42:29,318 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:42:37,563 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:42:38,222 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 400 Bad Request"
+2025-09-13 23:42:42,888 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:42:43,318 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 23:42:47,620 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:42:47,839 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 400 Bad Request"
+2025-09-13 23:42:52,769 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:42:53,185 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 23:42:57,490 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:42:57,490 - jobs.telegram_bot - ERROR - Failed to generate recommendations: RSIPSAREngulfingStrategy.__init__() missing 1 required positional argument: 'config'
+2025-09-13 23:42:57,921 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 23:43:07,686 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:43:08,207 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:43:09,007 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 23:43:18,422 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:43:28,625 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:43:38,831 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:43:49,025 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:43:59,232 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:44:01,752 - realtime_alert - INFO - Received signal 2, shutting down...
+2025-09-13 23:44:01,752 - realtime_alert - INFO - Shutting down Real-time Monitor
+2025-09-13 23:44:02,134 - realtime_alert - INFO - Received signal 2, shutting down...
+2025-09-13 23:44:02,134 - realtime_alert - INFO - Shutting down Real-time Monitor
+2025-09-13 23:44:03,234 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 23:44:03,272 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/sendMessage "HTTP/1.1 200 OK"
+2025-09-13 23:44:03,373 - realtime_alert - INFO - Received signal 2, shutting down...
+2025-09-13 23:44:03,373 - realtime_alert - INFO - Shutting down Real-time Monitor
+2025-09-13 23:44:04,110 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8047919251:AAH7-9j6_X08RpSPCQLMir_PVkkrx92ybdI/getUpdates "HTTP/1.1 200 OK"
+2025-09-13 23:44:04,110 - telegram.ext.Application - INFO - Application is stopping. This might take a moment.
+2025-09-13 23:44:04,110 - realtime_alert - ERROR - Error during shutdown: This Updater is not running!

@@ -364,60 +364,181 @@ class EmailNotifier:
         """
     
     def _get_daily_summary_template(self) -> str:
-        """Get HTML template for daily summary."""
+        """Get HTML template for daily summary with tomorrow's recommendations."""
         return """
         <!DOCTYPE html>
         <html>
         <head>
             <style>
-                body { font-family: Arial, sans-serif; margin: 20px; }
-                .header { background-color: #2196F3; color: white; padding: 15px; border-radius: 5px; }
-                .content { margin: 20px 0; }
-                .stats { display: flex; flex-wrap: wrap; gap: 15px; }
-                .stat-box { border: 1px solid #ddd; padding: 15px; border-radius: 5px; min-width: 200px; }
-                .stat-value { font-size: 24px; font-weight: bold; color: #1976D2; }
-                .stat-label { color: #666; }
-                .footer { margin-top: 30px; font-size: 12px; color: #666; }
+                body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+                .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+                .header { background: linear-gradient(135deg, #00d4aa, #1a1a2e); color: white; padding: 20px; text-align: center; }
+                .content { padding: 20px; }
+                .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+                .stat-box { border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; text-align: center; background: #fafafa; }
+                .stat-value { font-size: 24px; font-weight: bold; color: #00d4aa; }
+                .stat-label { color: #666; margin-top: 5px; }
+                .recommendations { margin: 30px 0; }
+                .rec-section { margin-bottom: 25px; }
+                .rec-header { background: #f8f9fa; padding: 12px; border-left: 4px solid #00d4aa; margin-bottom: 15px; }
+                .rec-title { font-size: 18px; font-weight: bold; color: #1a1a2e; margin: 0; }
+                .rec-subtitle { color: #666; font-size: 14px; margin: 5px 0 0 0; }
+                .rec-table { width: 100%; border-collapse: collapse; }
+                .rec-table th { background: #00d4aa; color: white; padding: 10px; text-align: left; }
+                .rec-table td { padding: 10px; border-bottom: 1px solid #eee; }
+                .rec-table tr:hover { background: #f8f9fa; }
+                .buy-signal { color: #00ff88; font-weight: bold; }
+                .sell-signal { color: #ff4757; font-weight: bold; }
+                .confidence-high { color: #00ff88; }
+                .confidence-medium { color: #ffa502; }
+                .confidence-low { color: #ff4757; }
+                .footer { margin-top: 30px; padding: 15px; background: #f8f9fa; font-size: 12px; color: #666; text-align: center; }
+                .disclaimer { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; margin: 20px 0; }
+                .disclaimer-title { font-weight: bold; color: #856404; }
             </style>
         </head>
         <body>
-            <div class="header">
-                <h2>📊 Daily Trading Summary</h2>
-                <p>{{ date }}</p>
-            </div>
-            
-            <div class="content">
-                <div class="stats">
-                    <div class="stat-box">
-                        <div class="stat-value">{{ summary.total_analyzed }}</div>
-                        <div class="stat-label">Stocks Analyzed</div>
+            <div class="container">
+                <div class="header">
+                    <h2>📊 Daily Trading Summary & Tomorrow's Recommendations</h2>
+                    <p>{{ date }}</p>
+                </div>
+                
+                <div class="content">
+                    <div class="stats">
+                        <div class="stat-box">
+                            <div class="stat-value">{{ summary.total_analyzed }}</div>
+                            <div class="stat-label">Stocks Analyzed</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">{{ summary.buy_candidates }}</div>
+                            <div class="stat-label">Buy Signals</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">{{ summary.sell_candidates }}</div>
+                            <div class="stat-label">Sell Signals</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">{{ summary.risk_alerts }}</div>
+                            <div class="stat-label">Risk Alerts</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">{{ "%.1f" | format(summary.avg_buy_confidence * 100) }}%</div>
+                            <div class="stat-label">Avg Buy Confidence</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">{{ "%.1f" | format(summary.avg_sell_confidence * 100) }}%</div>
+                            <div class="stat-label">Avg Sell Confidence</div>
+                        </div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-value">{{ summary.buy_candidates }}</div>
-                        <div class="stat-label">Buy Signals</div>
+                    
+                    {% if summary.tomorrow_recommendations %}
+                    <div class="recommendations">
+                        <h3 style="color: #1a1a2e; border-bottom: 2px solid #00d4aa; padding-bottom: 10px;">🚀 Tomorrow's Trading Recommendations</h3>
+                        
+                        {% if summary.tomorrow_recommendations.buy_list %}
+                        <div class="rec-section">
+                            <div class="rec-header">
+                                <h4 class="rec-title">🟢 BUY Recommendations</h4>
+                                <p class="rec-subtitle">{{ summary.tomorrow_recommendations.buy_list|length }} stocks recommended for purchase</p>
+                            </div>
+                            <table class="rec-table">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Current Price</th>
+                                        <th>Target Price</th>
+                                        <th>Confidence</th>
+                                        <th>Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for stock in summary.tomorrow_recommendations.buy_list %}
+                                    <tr>
+                                        <td><strong>{{ stock.symbol }}</strong></td>
+                                        <td>{{ "{:,.0f}".format(stock.current_price) }} VND</td>
+                                        <td class="buy-signal">{{ "{:,.0f}".format(stock.target_price) }} VND</td>
+                                        <td class="{% if stock.confidence >= 0.8 %}confidence-high{% elif stock.confidence >= 0.6 %}confidence-medium{% else %}confidence-low{% endif %}">{{ "%.1f" | format(stock.confidence * 100) }}%</td>
+                                        <td>{{ stock.reason }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endif %}
+                        
+                        {% if summary.tomorrow_recommendations.sell_list %}
+                        <div class="rec-section">
+                            <div class="rec-header">
+                                <h4 class="rec-title">🔴 SELL Recommendations</h4>
+                                <p class="rec-subtitle">{{ summary.tomorrow_recommendations.sell_list|length }} stocks recommended for sale</p>
+                            </div>
+                            <table class="rec-table">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Current Price</th>
+                                        <th>Target Price</th>
+                                        <th>Confidence</th>
+                                        <th>Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for stock in summary.tomorrow_recommendations.sell_list %}
+                                    <tr>
+                                        <td><strong>{{ stock.symbol }}</strong></td>
+                                        <td>{{ "{:,.0f}".format(stock.current_price) }} VND</td>
+                                        <td class="sell-signal">{{ "{:,.0f}".format(stock.target_price) }} VND</td>
+                                        <td class="{% if stock.confidence >= 0.8 %}confidence-high{% elif stock.confidence >= 0.6 %}confidence-medium{% else %}confidence-low{% endif %}">{{ "%.1f" | format(stock.confidence * 100) }}%</td>
+                                        <td>{{ stock.reason }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endif %}
+                        
+                        {% if summary.tomorrow_recommendations.watch_list %}
+                        <div class="rec-section">
+                            <div class="rec-header">
+                                <h4 class="rec-title">👁️ WATCH List</h4>
+                                <p class="rec-subtitle">{{ summary.tomorrow_recommendations.watch_list|length }} stocks to monitor closely</p>
+                            </div>
+                            <table class="rec-table">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Current Price</th>
+                                        <th>Key Levels</th>
+                                        <th>Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for stock in summary.tomorrow_recommendations.watch_list %}
+                                    <tr>
+                                        <td><strong>{{ stock.symbol }}</strong></td>
+                                        <td>{{ "{:,.0f}".format(stock.current_price) }} VND</td>
+                                        <td>{{ stock.key_levels }}</td>
+                                        <td>{{ stock.reason }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endif %}
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-value">{{ summary.sell_candidates }}</div>
-                        <div class="stat-label">Sell Signals</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value">{{ summary.risk_alerts }}</div>
-                        <div class="stat-label">Risk Alerts</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value">{{ "%.1f" | format(summary.avg_buy_confidence * 100) }}%</div>
-                        <div class="stat-label">Avg Buy Confidence</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-value">{{ "%.1f" | format(summary.avg_sell_confidence * 100) }}%</div>
-                        <div class="stat-label">Avg Sell Confidence</div>
+                    {% endif %}
+                    
+                    <div class="disclaimer">
+                        <div class="disclaimer-title">⚠️ Disclaimer</div>
+                        <p>These recommendations are generated by automated analysis and should not be considered as financial advice. Always conduct your own research and consider your risk tolerance before making investment decisions. Past performance does not guarantee future results.</p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="footer">
-                <p>Generated at: {{ timestamp }}</p>
-                <p>Daily summary of automated trading system activity.</p>
+                
+                <div class="footer">
+                    <p>Generated at: {{ timestamp }}</p>
+                    <p>Automated Trading System - Daily Summary & Recommendations</p>
+                </div>
             </div>
         </body>
         </html>
